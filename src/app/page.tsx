@@ -1,4 +1,6 @@
 import Link from "next/link";
+import Navbar from "@/components/Navbar";
+import PageAnimations from "@/components/PageAnimations";
 
 const modules = [
   {
@@ -39,106 +41,13 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-[#f6f7f9] text-[#0b1220]">
 
-      {/* =====================================================
-          NAVBAR
-      ====================================================== */}
+      <Navbar />
 
-      <header className="sticky top-0 z-50 border-b border-slate-200/80 bg-white/95 backdrop-blur-xl">
+      <PageAnimations />
 
-        <div className="mx-auto flex h-[76px] max-w-[1400px] items-center justify-between px-6 lg:px-10">
+      {/* HERO */}
 
-          {/* LOGO */}
-
-          <Link
-            href="/"
-            className="group flex items-center gap-3"
-          >
-
-            <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#0b1220] text-sm font-black text-white shadow-sm transition duration-300 group-hover:scale-105">
-              BQ
-            </div>
-
-            <div className="leading-none">
-
-              <div className="text-[15px] font-black tracking-tight text-[#0b1220]">
-                BEI QUALITY
-              </div>
-
-              <div className="mt-1 text-[10px] font-semibold tracking-[0.18em] text-slate-400">
-                TRAINING CENTER
-              </div>
-
-            </div>
-
-          </Link>
-
-
-          {/* NAVIGATION */}
-
-          <nav className="hidden items-center gap-1 md:flex">
-
-            <NavLink
-              href="/"
-              active
-            >
-              Home
-            </NavLink>
-
-            <NavLink href="/modules">
-              Modules
-            </NavLink>
-
-            <NavLink href="/pre-test">
-              Pre-Test
-            </NavLink>
-
-            <NavLink href="/post-test">
-              Post-Test
-            </NavLink>
-
-            <NavLink href="/contact">
-              Contact
-            </NavLink>
-
-          </nav>
-
-
-          {/* START BUTTON */}
-
-          <Link
-            href="/pre-test"
-            className="
-              group flex items-center gap-2
-              rounded-xl
-              bg-[#0b1220]
-              px-5 py-3
-              text-sm font-bold text-white
-              shadow-lg shadow-slate-900/10
-              transition duration-300
-              hover:-translate-y-0.5
-              hover:bg-blue-600
-              hover:shadow-xl
-            "
-          >
-
-            Start Training
-
-            <span className="transition-transform duration-300 group-hover:translate-x-1">
-              →
-            </span>
-
-          </Link>
-
-        </div>
-
-      </header>
-
-
-      {/* =====================================================
-          HERO
-      ====================================================== */}
-
-      <section className="relative overflow-hidden border-b border-slate-200 bg-white">
+      <section data-hero className="relative overflow-hidden border-b border-slate-200 bg-white">
 
         {/* BACKGROUND DECORATION */}
 
@@ -170,47 +79,44 @@ export default function Home() {
           "
         />
 
-
         {/* HERO CONTENT */}
 
-        <div className="relative mx-auto flex min-h-[650px] max-w-[1400px] items-center px-6 py-24 lg:px-10 lg:py-28">
-
+        <div
+          className="
+            relative
+            mx-auto
+            flex
+            min-h-[650px]
+            max-w-[1400px]
+            items-center
+            px-6
+            py-24
+            lg:px-10
+            lg:py-28
+          "
+        >
           <div className="max-w-5xl">
 
             {/* LABEL */}
 
-            <div className="mb-7 flex items-center gap-3">
-
-              <div className="h-px w-10 bg-blue-600" />
+            <div data-hero-item className="mb-7 flex items-center gap-3">
+              <div data-line className="h-px w-10 bg-blue-600" />
 
               <span className="text-[11px] font-black tracking-[0.28em] text-blue-600">
                 QUALITY TRAINING PLATFORM
               </span>
-
             </div>
-
 
             {/* MAIN TITLE */}
 
-            <h1
-              className="
-                text-[58px]
-                font-black
-                leading-[0.9]
-                tracking-[-0.055em]
-                text-[#0b1220]
-                sm:text-7xl
-                lg:text-[100px]
-              "
+            <h1 data-hero-item
+              className="text-[58px] font-black leading-[0.9] tracking-[-0.055em] text-[#0b1220] sm:text-7xl lg:text-[100px]"
             >
-
               BUILD
 
               <br />
 
-              <span>
-                QUALITY.
-              </span>
+              <span>QUALITY.</span>
 
               <br />
 
@@ -223,81 +129,85 @@ export default function Home() {
               <span className="text-blue-600">
                 EXCELLENCE.
               </span>
-
             </h1>
-
 
             {/* DESCRIPTION */}
 
-            <p className="mt-9 max-w-2xl text-[16px] leading-7 text-slate-500">
-
+            <p data-hero-item className="mt-9 max-w-2xl text-[16px] leading-7 text-slate-500">
               Platform pembelajaran untuk meningkatkan kompetensi
               dalam{" "}
-
               <strong className="font-semibold text-slate-700">
                 Quality Management System
               </strong>
               , Automotive Core Tools, dan Continuous Improvement.
-
             </p>
-
 
             {/* BUTTONS */}
 
-            <div className="mt-9 flex flex-wrap gap-3">
+            <div data-hero-item className="mt-9 flex flex-wrap gap-3">
 
               <Link
                 href="/pre-test"
                 className="
-                  group flex items-center gap-3
+                  group
+                  flex
+                  items-center
+                  gap-3
                   rounded-xl
                   bg-[#0b1220]
-                  px-6 py-3.5
-                  text-sm font-bold text-white
-                  shadow-xl shadow-slate-900/10
-                  transition duration-300
+                  px-6
+                  py-3.5
+                  text-sm
+                  font-bold
+                  text-white
+                  shadow-xl
+                  shadow-slate-900/10
+                  transition
+                  duration-300
                   hover:-translate-y-1
                   hover:bg-blue-600
                 "
               >
-
                 Mulai Pre-Test
 
                 <span className="transition-transform duration-300 group-hover:translate-x-1">
                   →
                 </span>
-
               </Link>
-
 
               <Link
                 href="/modules"
                 className="
-                  flex items-center gap-2
+                  flex
+                  items-center
+                  gap-2
                   rounded-xl
-                  border border-slate-300
+                  border
+                  border-slate-300
                   bg-white
-                  px-6 py-3.5
-                  text-sm font-bold text-slate-700
-                  transition duration-300
+                  px-6
+                  py-3.5
+                  text-sm
+                  font-bold
+                  text-slate-700
+                  transition
+                  duration-300
                   hover:border-[#0b1220]
                   hover:bg-slate-50
                 "
               >
-
                 Lihat Modul
-
               </Link>
 
             </div>
-
 
             {/* TRAINING CATEGORIES */}
 
             <div
               className="
                 mt-14
-                flex flex-wrap
+                flex
+                flex-wrap
                 items-center
                 gap-x-8
                 gap-y-4
@@ -313,11 +223,15 @@ export default function Home() {
 
                 <span
                   className="
-                    flex h-8 w-8
-                    items-center justify-center
+                    flex
+                    h-8
+                    w-8
+                    items-center
+                    justify-center
                     rounded-lg
                     bg-blue-50
-                    text-xs font-black
+                    text-xs
+                    font-black
                     text-blue-600
                   "
                 >
@@ -330,9 +244,7 @@ export default function Home() {
 
               </div>
 
-
-              <div className="h-5 w-px bg-slate-200" />
-
+              <div className="hidden h-5 w-px bg-slate-200 sm:block" />
 
               {/* CATEGORY 02 */}
 
@@ -340,11 +252,15 @@ export default function Home() {
 
                 <span
                   className="
-                    flex h-8 w-8
-                    items-center justify-center
+                    flex
+                    h-8
+                    w-8
+                    items-center
+                    justify-center
                     rounded-lg
                     bg-slate-100
-                    text-xs font-black
+                    text-xs
+                    font-black
                     text-slate-600
                   "
                 >
@@ -357,9 +273,7 @@ export default function Home() {
 
               </div>
 
-
-              <div className="h-5 w-px bg-slate-200" />
-
+              <div className="hidden h-5 w-px bg-slate-200 sm:block" />
 
               {/* CATEGORY 03 */}
 
@@ -367,11 +281,15 @@ export default function Home() {
 
                 <span
                   className="
-                    flex h-8 w-8
-                    items-center justify-center
+                    flex
+                    h-8
+                    w-8
+                    items-center
+                    justify-center
                     rounded-lg
                     bg-slate-100
-                    text-xs font-black
+                    text-xs
+                    font-black
                     text-slate-600
                   "
                 >
@@ -387,15 +305,11 @@ export default function Home() {
             </div>
 
           </div>
-
         </div>
 
       </section>
 
-
-      {/* =====================================================
-          MODULE SECTION
-      ====================================================== */}
+      {/* MODULE SECTION */}
 
       <section className="mx-auto max-w-[1400px] px-6 py-24 lg:px-10">
 
@@ -403,7 +317,8 @@ export default function Home() {
 
         <div
           className="
-            flex flex-col
+            flex
+            flex-col
             justify-between
             gap-6
             md:flex-row
@@ -423,7 +338,6 @@ export default function Home() {
 
             </div>
 
-
             <h2
               className="
                 text-4xl
@@ -435,40 +349,36 @@ export default function Home() {
               Training Modules
             </h2>
 
-
             <p className="mt-4 max-w-xl text-sm leading-6 text-slate-500">
-
               Materi training yang dirancang untuk membangun
               pemahaman dan kemampuan praktis dalam quality.
-
             </p>
 
           </div>
 
-
-          <Link
-            href="/modules"
+          <Link href="/modules"
             className="
-              group flex items-center gap-2
-              text-sm font-bold
+              group
+              flex
+              items-center
+              gap-2
+              text-sm
+              font-bold
               text-slate-700
             "
           >
-
             View all modules
 
             <span className="transition-transform group-hover:translate-x-1">
               →
             </span>
-
           </Link>
 
         </div>
 
-
         {/* MODULE GRID */}
 
-        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <div data-card-group className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
 
           {modules.map((module) => (
             <ModuleCard
@@ -481,12 +391,9 @@ export default function Home() {
 
       </section>
 
+      {/* ASSESSMENT SECTION */}
 
-      {/* =====================================================
-          ASSESSMENT SECTION
-      ====================================================== */}
-
-      <section className="relative overflow-hidden bg-[#0b1220] text-white">
+      <section data-section className="relative overflow-hidden bg-[#0b1220] text-white">
 
         {/* BACKGROUND DECORATION */}
 
@@ -505,8 +412,16 @@ export default function Home() {
           "
         />
 
-
-        <div className="relative mx-auto max-w-[1400px] px-6 py-24 lg:px-10">
+        <div
+          className="
+            relative
+            mx-auto
+            max-w-[1400px]
+            px-6
+            py-24
+            lg:px-10
+          "
+        >
 
           <div
             className="
@@ -531,7 +446,6 @@ export default function Home() {
 
               </div>
 
-
               <h2
                 className="
                   text-4xl
@@ -541,7 +455,6 @@ export default function Home() {
                   sm:text-5xl
                 "
               >
-
                 Measure your
 
                 <br />
@@ -549,24 +462,19 @@ export default function Home() {
                 <span className="text-slate-500">
                   improvement.
                 </span>
-
               </h2>
 
-
               <p className="mt-6 max-w-lg text-sm leading-7 text-slate-400">
-
                 Gunakan Pre-Test untuk mengetahui kemampuan awal,
                 kemudian bandingkan dengan hasil Post-Test setelah
                 menyelesaikan seluruh materi training.
-
               </p>
 
             </div>
 
-
             {/* RIGHT */}
 
-            <div className="grid gap-4 sm:grid-cols-2">
+            <div data-card-group className="grid gap-4 sm:grid-cols-2">
 
               <AssessmentCard
                 number="01"
@@ -590,10 +498,7 @@ export default function Home() {
 
       </section>
 
-
-      {/* =====================================================
-          FOOTER
-      ====================================================== */}
+      {/* FOOTER */}
 
       <footer className="border-t border-slate-200 bg-white">
 
@@ -627,7 +532,6 @@ export default function Home() {
 
           </div>
 
-
           <p>
             © 2026 BEI Quality Training
           </p>
@@ -640,46 +544,7 @@ export default function Home() {
   );
 }
 
-
-/* ============================================================
-   NAVIGATION LINK
-============================================================ */
-
-function NavLink({
-  href,
-  children,
-  active = false,
-}: {
-  href: string;
-  children: React.ReactNode;
-  active?: boolean;
-}) {
-  return (
-    <Link
-      href={href}
-      className={`
-        rounded-lg
-        px-4
-        py-2.5
-        text-sm
-        font-semibold
-        transition
-        ${
-          active
-            ? "bg-slate-100 text-[#0b1220]"
-            : "text-slate-500 hover:bg-slate-50 hover:text-[#0b1220]"
-        }
-      `}
-    >
-      {children}
-    </Link>
-  );
-}
-
-
-/* ============================================================
-   MODULE CARD
-============================================================ */
+/*MODULE CARD*/
 
 function ModuleCard({
   number,
@@ -695,7 +560,7 @@ function ModuleCard({
   accent: string;
 }) {
   return (
-    <Link
+    <Link data-card
       href="/modules"
       className="
         group
@@ -731,7 +596,6 @@ function ModuleCard({
         `}
       />
 
-
       {/* CARD TOP */}
 
       <div className="flex items-start justify-between">
@@ -740,11 +604,13 @@ function ModuleCard({
           {number}
         </span>
 
-
         <span
           className="
-            flex h-8 w-8
-            items-center justify-center
+            flex
+            h-8
+            w-8
+            items-center
+            justify-center
             rounded-lg
             bg-slate-50
             text-slate-400
@@ -757,7 +623,6 @@ function ModuleCard({
         </span>
 
       </div>
-
 
       {/* CATEGORY */}
 
@@ -773,7 +638,6 @@ function ModuleCard({
         {category}
       </p>
 
-
       {/* TITLE */}
 
       <h3
@@ -788,13 +652,11 @@ function ModuleCard({
         {title}
       </h3>
 
-
       {/* DESCRIPTION */}
 
       <p className="mt-3 text-sm leading-6 text-slate-500">
         {description}
       </p>
-
 
       {/* FOOTER */}
 
@@ -813,7 +675,6 @@ function ModuleCard({
         <span className="text-[10px] font-bold text-slate-400">
           LEARNING MODULE
         </span>
-
 
         <span
           className="
@@ -834,10 +695,7 @@ function ModuleCard({
   );
 }
 
-
-/* ============================================================
-   ASSESSMENT CARD
-============================================================ */
+/*ASSESSMENT CARD*/
 
 function AssessmentCard({
   number,
@@ -851,7 +709,7 @@ function AssessmentCard({
   href: string;
 }) {
   return (
-    <Link
+    <Link data-card
       href={href}
       className="
         group
@@ -876,11 +734,13 @@ function AssessmentCard({
           {number}
         </span>
 
-
         <span
           className="
-            flex h-9 w-9
-            items-center justify-center
+            flex
+            h-9
+            w-9
+            items-center
+            justify-center
             rounded-lg
             bg-white/5
             text-slate-400
@@ -894,20 +754,17 @@ function AssessmentCard({
 
       </div>
 
-
       {/* TITLE */}
 
       <h3 className="mt-10 text-2xl font-black">
         {title}
       </h3>
 
-
       {/* DESCRIPTION */}
 
       <p className="mt-3 text-sm leading-6 text-slate-400">
         {description}
       </p>
-
 
       {/* LINK */}
 
