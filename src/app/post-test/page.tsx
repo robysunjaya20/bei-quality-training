@@ -32,6 +32,16 @@ const postTests = [
     href: "https://script.google.com/macros/s/AKfycbyX6POD9ZUxvFFL3D8pObqgKFkS8TgV6DDm5FknFuc6TBxzayYgjChYNDGqCha2NAgZbA/exec",
     accent: "blue",
   },
+  {
+    number: "04",
+    title: "Standar Tolerance",
+    subtitle: "Training Basic Standar Tolerance",
+    description:
+      "Assessment untuk mengevaluasi pemahaman mengenai basic Standar Tolerance.",
+    type: "POST TEST",
+    href: "https://test-standar-tolerance.vercel.app/post-test",
+    accent: "dark",
+  },
 ];
 
 export default function PostTestPage() {
