@@ -30,7 +30,7 @@ const preTests = [
     description:
       "Assessment untuk mengukur pemahaman mengenai basic defect name.",
     type: "PRE & POST TEST",
-    href: "https://script.google.com/macros/s/AKfycbyX6POD9ZUxvFFL3D8pObqgKFkS8TgV6DDm5FknFuc6TBxzayYgjChYNDGqCha2NAgZbA/exec",
+    href: "https://script.google.com/macros/s/AKfycbzloX7j5RnypoNFQBPy0XJ3B85Im8L8rnXcTB4pYj0ITuIHj_ie7q_x6Hv44THvbkNFEQ/exec",
     accent: "blue",
   },
   {
