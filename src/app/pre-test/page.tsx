@@ -39,9 +39,19 @@ const preTests = [
     subtitle: "Training Basic Standar Tolerance",
     description:
       "Assessment untuk mengukur pemahaman mengenai basic Standar Tolerance.",
-    type: "PRE TEST",
+      type: "PRE TEST",
     href: "https://test-standar-tolerance.vercel.app/pre-test",
     accent: "dark",
+  },
+  {
+    number: "05",
+    title: "14 Q Principle",
+    subtitle: "Training Basic 14 Q Principle",
+    description:
+      "Assessment untuk mengukur pemahaman mengenai basic 14 Q Principle.",
+    type: "PRE TEST",
+    href: "https://pre-test-14q-principle.vercel.app/",
+    accent: "blue",
   },
 ];
 

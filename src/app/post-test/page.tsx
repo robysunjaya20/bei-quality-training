@@ -38,9 +38,19 @@ const postTests = [
     subtitle: "Training Basic Standar Tolerance",
     description:
       "Assessment untuk mengevaluasi pemahaman mengenai basic Standar Tolerance.",
-    type: "POST TEST",
+      type: "POST TEST",
     href: "https://test-standar-tolerance.vercel.app/post-test",
     accent: "dark",
+  },
+  {
+    number: "05",
+    title: "Basic 14 Q Principle",
+    subtitle: "Training Basic 14 Q Principle",
+    description:
+      "Assessment untuk mengevaluasi pemahaman mengenai basic defect name.",
+    type: "PRE & POST TEST",
+    href: "https://script.google.com/macros/s/AKfycbxcYuMyX8BukJeUPcB88JZorjeytxpKCL6i8QuCb2Y56mrjTKWEquCLKJjvJg-re-jelA/exec",
+    accent: "blue",
   },
 ];
 
