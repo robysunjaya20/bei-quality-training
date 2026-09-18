@@ -53,7 +53,17 @@ const preTests = [
     href: "https://pre-test-14q-principle.vercel.app/",
     accent: "blue",
   },
-];
+  {
+    number: "06",
+    title: "Item-Item-Mirror",
+    subtitle: "Training Item-Item-Mirror",
+    description:
+      "Assessment untuk mengukur pemahaman mengenai Item-Item-Mirror.",
+    type: "PRE TEST",
+    href: "https://item-item-mirror.vercel.app/pre-test",
+    accent: "blue",
+  },
+  ];
 
 export default function PreTestPage() {
   return (
