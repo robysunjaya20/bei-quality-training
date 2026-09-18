@@ -54,12 +54,12 @@ const postTests = [
   },
   {
     number: "06",
-    title: "14 Q Principle",
-    subtitle: "Training Basic 14 Q Principle",
+    title: "ITEM - ITEM MIRROR",
+    subtitle: "Training terkait ITEM - ITEM MIRROR",
     description:
-      "Assessment untuk mengevaluasi pemahaman mengenai 14 Q Principle.",
+      "Assessment untuk mengevaluasi pemahaman mengenai ITEM - ITEM MIRROR.",
       type: "POST TEST",
-    href: "https://post-test-14q-principle.vercel.app/",
+    href: "https://item-item-mirror.vercel.app/post-test/",
     accent: "dark",
   },
 ];
