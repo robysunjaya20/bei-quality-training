@@ -52,6 +52,16 @@ const postTests = [
     href: "https://post-test-14q-principle.vercel.app/",
     accent: "blue",
   },
+  {
+    number: "06",
+    title: "14 Q Principle",
+    subtitle: "Training Basic 14 Q Principle",
+    description:
+      "Assessment untuk mengevaluasi pemahaman mengenai 14 Q Principle.",
+      type: "POST TEST",
+    href: "https://post-test-14q-principle.vercel.app/",
+    accent: "dark",
+  },
 ];
 
 export default function PostTestPage() {
