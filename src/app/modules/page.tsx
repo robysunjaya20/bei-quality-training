@@ -39,9 +39,19 @@ const modules = [
     subtitle: "Bumjin Training Center",
     description:
       "Materi Basic Training Defect Injection dalam format PDF. Cocok digunakan sebagai referensi pembelajaran mengenai defect Injection.",
-    type: "PDF",
+    type: "POWERPOINT",
     href: "https://docs.google.com/presentation/d/1y16-s_kd45uBSrRaQ2fakhKQSUz222YQ/edit?usp=sharing&ouid=106738956518567923854&rtpof=true&sd=true",
     accent: "dark",
+  },
+  {
+    number: "05",
+    title: "Basic 14Q Principle",
+    subtitle: "Bumjin Training Center",
+    description:
+      "Materi Basic 14Q Principle dalam format PDF. Gunakan modul ini untuk mempelajari materi training mengenai Basic 14Q Principle.",
+    type: "PDF",
+    href: "https://docs.google.com/presentation/d/14s_5biQ6BMNgcQZtY2tLWAXJgK5ALfMd/edit?usp=sharing&ouid=106738956518567923854&rtpof=true&sd=true",
+    accent: "blue",
   },
 
 ];
