@@ -20,9 +20,30 @@ const modules = [
     description:
       "Materi general training dalam format PDF. Cocok digunakan sebagai referensi pembelajaran.",
     type: "PDF",
-    href: "https://drive.google.com/file/d/1kafRhL7cDhwNpm2E58LJmYjINJCFjC8w/view?usp=sharing",
+    href: "https://drive.google.com/file/d/1ovkSgJlwO_dfEjO2z0W3iNJc0WKY5KN7/view?usp=sharing",
     accent: "dark",
   },
+  {
+    number: "03",
+    title: "5S & 3T Modul",
+    subtitle: "Bumjin Training Center",
+    description:
+      "Materi 5S & 3T dalam format PDF. Gunakan modul ini untuk mempelajari materi training mengenai 5S & 3T.",
+    type: "PDF",
+    href: "https://drive.google.com/file/d/1tR2XXpSZqzGl3BGDgLHUKAzOFuHQ3f5A/view?usp=sharing",
+    accent: "blue",
+  },
+  {
+    number: "04",
+    title: "Basic Training Defect Injection_Bumjin",
+    subtitle: "Bumjin Training Center",
+    description:
+      "Materi Basic Training Defect Injection dalam format PDF. Cocok digunakan sebagai referensi pembelajaran mengenai defect Injection.",
+    type: "PDF",
+    href: "https://docs.google.com/presentation/d/1y16-s_kd45uBSrRaQ2fakhKQSUz222YQ/edit?usp=sharing&ouid=106738956518567923854&rtpof=true&sd=true",
+    accent: "dark",
+  },
+
 ];
 
 export default function ModulesPage() {
