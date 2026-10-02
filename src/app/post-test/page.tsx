@@ -9,7 +9,7 @@ const postTests = [
     description:
       "Evaluasi pemahaman setelah mengikuti training 5S & 3T.",
     type: "POST-TEST",
-    href: "https://forms.gle/pGRcpUXyzdetDLA47",
+    href: "https://forms.gle/hsgG3CpFbQLPCpsP6",
     accent: "blue",
   },
   {
@@ -19,7 +19,7 @@ const postTests = [
     description:
       "Evaluasi pemahaman mengenai Fishbone Diagram dan root cause analysis setelah training.",
     type: "POST-TEST",
-    href: "https://forms.gle/Uju7tXvRRBAycjsN9",
+    href: "https://forms.gle/E83kotMN2dBrEc5i6",
     accent: "dark",
   },
   {
@@ -49,7 +49,7 @@ const postTests = [
     description:
       "Assessment untuk mengevaluasi pemahaman mengenai basic 14 Q Principle.",
     type: "POST TEST",
-    href: "https://post-test-14q-principle.vercel.app/",
+    href: "https://14q-principle.vercel.app//",
     accent: "blue",
   },
   {

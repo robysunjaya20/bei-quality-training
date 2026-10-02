@@ -10,7 +10,7 @@ const preTests = [
     description:
       "Ukur pengetahuan awal mengenai konsep 5S & 3T sebelum mengikuti training.",
     type: "PRE-TEST",
-    href: "https://forms.gle/aTK9UqHK6THYv1RY8",
+    href: "https://forms.gle/Zk7uNtdWaWA1ADRt8",
     accent: "blue",
   },
   {
@@ -20,7 +20,7 @@ const preTests = [
     description:
       "Ukur pemahaman awal mengenai Fishbone Diagram dan root cause analysis.",
     type: "PRE-TEST",
-    href: "https://forms.gle/N9SBNnm5WTCDHihZ9",
+    href: "https://forms.gle/i77rD3i2fbtzs1x37",
     accent: "dark",
   },
   {
@@ -50,7 +50,7 @@ const preTests = [
     description:
       "Assessment untuk mengukur pemahaman mengenai basic 14 Q Principle.",
     type: "PRE TEST",
-    href: "https://pre-test-14q-principle.vercel.app/",
+    href: "https://14q-principle.vercel.app/",
     accent: "blue",
   },
   {
