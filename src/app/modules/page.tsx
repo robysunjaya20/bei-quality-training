@@ -5,22 +5,22 @@ import PageAnimations from "@/components/PageAnimations";
 const modules = [
   {
     number: "01",
+    title: "General Modul PDF",
+    subtitle: "Bumjin Training Center",
+    description:
+    "Materi general training dalam format PDF. Cocok digunakan sebagai referensi pembelajaran.",
+    type: "PDF",
+    href: "https://drive.google.com/file/d/1ovkSgJlwO_dfEjO2z0W3iNJc0WKY5KN7/view?usp=sharing",
+    accent: "blue",
+  },
+  {
+    number: "02",
     title: "General Modul PPT",
     subtitle: "Bumjin Training Center",
     description:
       "Materi general training dalam format PowerPoint. Gunakan modul ini untuk mempelajari materi training secara lengkap.",
     type: "POWERPOINT",
     href: "https://docs.google.com/presentation/d/1A6xwxKWrAKagAyeei9QCt5LxAP2cPjvR/edit?usp=sharing&ouid=100055124284914090025&rtpof=true&sd=true",
-    accent: "blue",
-  },
-  {
-    number: "02",
-    title: "General Modul PDF",
-    subtitle: "Bumjin Training Center",
-    description:
-      "Materi general training dalam format PDF. Cocok digunakan sebagai referensi pembelajaran.",
-    type: "PDF",
-    href: "https://drive.google.com/file/d/1ovkSgJlwO_dfEjO2z0W3iNJc0WKY5KN7/view?usp=sharing",
     accent: "dark",
   },
   {
