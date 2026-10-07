@@ -53,6 +53,16 @@ const modules = [
     href: "https://docs.google.com/presentation/d/14s_5biQ6BMNgcQZtY2tLWAXJgK5ALfMd/edit?usp=sharing&ouid=106738956518567923854&rtpof=true&sd=true",
     accent: "blue",
   },
+  {
+    number: "06",
+    title: "Modul Lv 1",
+    subtitle: "Bumjin Training Center",
+    description:
+      "Materi Basic Training Untuk Lv 1 dalam format PDF. Digunakan sebagai referensi pembelajaran Di LV 1.",
+    type: "POWERPOINT",
+    href: "https://docs.google.com/presentation/d/1HuHqeVXtchv_rRbncaZ8AFCU5-1akNG7/edit?usp=sharing&ouid=109910053988094453069&rtpof=true&sd=true",
+    accent: "dark",
+  },
 
 ];
 
