@@ -38,8 +38,8 @@ const preTests = [
     title: "Standar Tolerance",
     subtitle: "Training Basic Standar Tolerance",
     description:
-      "Assessment untuk mengukur pemahaman mengenai basic Standar Tolerance.",
-      type: "PRE TEST",
+    "Assessment untuk mengukur pemahaman mengenai basic Standar Tolerance.",
+    type: "PRE TEST",
     href: "https://test-standar-tolerance.vercel.app/pre-test",
     accent: "dark",
   },
@@ -48,7 +48,7 @@ const preTests = [
     title: "14 Q Principle",
     subtitle: "Training Basic 14 Q Principle",
     description:
-      "Assessment untuk mengukur pemahaman mengenai basic 14 Q Principle.",
+    "Assessment untuk mengukur pemahaman mengenai basic 14 Q Principle.",
     type: "PRE TEST",
     href: "https://14q-principle.vercel.app/",
     accent: "blue",
@@ -58,12 +58,42 @@ const preTests = [
     title: "Item-Item-Mirror",
     subtitle: "Training Item-Item-Mirror",
     description:
-      "Assessment untuk mengukur pemahaman mengenai Item-Item-Mirror.",
+    "Assessment untuk mengukur pemahaman mengenai Item-Item-Mirror.",
     type: "PRE TEST",
     href: "https://item-item-mirror.vercel.app/pre-test",
+    accent: "dark",
+  },
+  {
+    number: "07",
+    title: "Clasification Class Product",
+    subtitle: "Training Clasification Class Product",
+    description:
+    "Assessment untuk mengukur pemahaman mengenai Clasification Class Product.",
+    type: "PRE TEST",
+    href: "https://forms.gle/F9c19NTXmWyFzhSDA",
     accent: "blue",
   },
-  ];
+  {
+    number: "08",
+    title: "Horenso",
+    subtitle: "Training Horenso",
+    description:
+    "Assessment untuk mengukur pemahaman mengenai Horenso.",
+    type: "PRE TEST",
+    href: "https://forms.gle/KvzHpv2oPogest1h8",
+    accent: "dark",
+  },
+  {
+    number: "09",
+    title: "Basic Analysis 5Why",
+    subtitle: "Training Basic Analysis 5Why",
+    description:
+      "Assessment untuk mengukur pemahaman mengenai Basic Analysis 5Why.",
+    type: "PRE & POST TEST",
+    href: "https://basic-analysis-5-why.vercel.app/",
+    accent: "blue",
+  },
+];
 
 export default function PreTestPage() {
   return (

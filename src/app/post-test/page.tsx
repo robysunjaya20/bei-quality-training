@@ -62,6 +62,36 @@ const postTests = [
     href: "https://item-item-mirror.vercel.app/post-test/",
     accent: "dark",
   },
+    {
+    number: "07",
+    title: "Clasification Class Product",
+    subtitle: "Training Clasification Class Product",
+    description:
+    "Assessment untuk mengukur pemahaman mengenai Clasification Class Product.",
+    type: "POST TEST",
+    href: "https://forms.gle/59DS6cjiDkeBsw8UA",
+    accent: "blue",
+  },
+  {
+    number: "08",
+    title: "Horenso",
+    subtitle: "Training Horenso",
+    description:
+    "Assessment untuk mengukur pemahaman mengenai Horenso.",
+    type: "POST TEST",
+    href: "https://forms.gle/k8XdaKkVc13Dpaaj7",
+    accent: "dark",
+  },
+  {
+    number: "09",
+    title: "Basic Analysis 5Why",
+    subtitle: "Training Basic Analysis 5Why",
+    description:
+      "Assessment untuk mengukur pemahaman mengenai Basic Analysis 5Why.",
+    type: "PRE & POST TEST",
+    href: "https://basic-analysis-5-why.vercel.app/",
+    accent: "blue",
+  },
 ];
 
 export default function PostTestPage() {
