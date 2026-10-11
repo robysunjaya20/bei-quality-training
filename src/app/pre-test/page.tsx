@@ -5,22 +5,22 @@ import PageAnimations from "@/components/PageAnimations";
 const preTests = [
   {
     number: "01",
-    title: "5S & 3T",
-    subtitle: "Training 5S & 3T",
+    title: "Basic Defect Knowledge",
+    subtitle: "Training Basic Defect Knowledge",
     description:
-      "Ukur pengetahuan awal mengenai konsep 5S & 3T sebelum mengikuti training.",
+      "Ukur pengetahuan awal mengenai Basic Defect Knowledge sebelum mengikuti training.",
     type: "PRE-TEST",
-    href: "https://forms.gle/Zk7uNtdWaWA1ADRt8",
+    href: "https://defect-injection-knowledge.vercel.app/",
     accent: "blue",
   },
   {
     number: "02",
-    title: "Fishbone Diagram",
-    subtitle: "Training Fishbone Diagram",
+    title: "Defect Assembly Knowledge",
+    subtitle: "Training Defect Assembly Knowledge",
     description:
-      "Ukur pemahaman awal mengenai Fishbone Diagram dan root cause analysis.",
+      "Ukur pengetahuan awal mengenai Defect Assembly Knowledge sebelum mengikuti training.",
     type: "PRE-TEST",
-    href: "https://forms.gle/i77rD3i2fbtzs1x37",
+    href: "https://defect-assembly-knowledge.vercel.app/pretest",
     accent: "dark",
   },
   {
@@ -35,62 +35,82 @@ const preTests = [
   },
   {
     number: "04",
-    title: "Standar Tolerance",
-    subtitle: "Training Basic Standar Tolerance",
-    description:
-    "Assessment untuk mengukur pemahaman mengenai basic Standar Tolerance.",
-    type: "PRE TEST",
-    href: "https://test-standar-tolerance.vercel.app/pre-test",
-    accent: "dark",
-  },
-  {
-    number: "05",
-    title: "14 Q Principle",
-    subtitle: "Training Basic 14 Q Principle",
-    description:
-    "Assessment untuk mengukur pemahaman mengenai basic 14 Q Principle.",
-    type: "PRE TEST",
-    href: "https://14q-principle.vercel.app/",
-    accent: "blue",
-  },
-  {
-    number: "06",
-    title: "Item-Item-Mirror",
-    subtitle: "Training Item-Item-Mirror",
-    description:
-    "Assessment untuk mengukur pemahaman mengenai Item-Item-Mirror.",
-    type: "PRE TEST",
-    href: "https://item-item-mirror.vercel.app/pre-test",
-    accent: "dark",
-  },
-  {
-    number: "07",
     title: "Clasification Class Product",
     subtitle: "Training Clasification Class Product",
     description:
     "Assessment untuk mengukur pemahaman mengenai Clasification Class Product.",
     type: "PRE TEST",
     href: "https://forms.gle/F9c19NTXmWyFzhSDA",
-    accent: "blue",
+    accent: "dark",
   },
   {
-    number: "08",
+    number: "05",
     title: "Horenso",
     subtitle: "Training Horenso",
     description:
     "Assessment untuk mengukur pemahaman mengenai Horenso.",
     type: "PRE TEST",
     href: "https://forms.gle/KvzHpv2oPogest1h8",
+    accent: "blue",
+  },
+  {
+    number: "06",
+    title: "5S & 3T",
+    subtitle: "Training 5S & 3T",
+    description:
+      "Ukur pengetahuan awal mengenai konsep 5S & 3T sebelum mengikuti training.",
+    type: "PRE-TEST",
+    href: "https://forms.gle/Zk7uNtdWaWA1ADRt8",
     accent: "dark",
   },
   {
-    number: "09",
+    number: "07",
+    title: "Fishbone Diagram",
+    subtitle: "Training Fishbone Diagram",
+    description:
+      "Ukur pemahaman awal mengenai Fishbone Diagram dan root cause analysis.",
+    type: "PRE-TEST",
+    href: "https://forms.gle/i77rD3i2fbtzs1x37",
+    accent: "blue",
+  },
+  {
+    number: "08",
     title: "Basic Analysis 5Why",
     subtitle: "Training Basic Analysis 5Why",
     description:
       "Assessment untuk mengukur pemahaman mengenai Basic Analysis 5Why.",
     type: "PRE & POST TEST",
     href: "https://basic-analysis-5-why.vercel.app/",
+    accent: "dark",
+  },
+  {
+    number: "09",
+    title: "Standar Tolerance",
+    subtitle: "Training Basic Standar Tolerance",
+    description:
+    "Assessment untuk mengukur pemahaman mengenai basic Standar Tolerance.",
+    type: "PRE TEST",
+    href: "https://test-standar-tolerance.vercel.app/pre-test",
+    accent: "blue",
+  },
+  {
+    number: "10",
+    title: "14 Q Principle",
+    subtitle: "Training Basic 14 Q Principle",
+    description:
+    "Assessment untuk mengukur pemahaman mengenai basic 14 Q Principle.",
+    type: "PRE TEST",
+    href: "https://14q-principle.vercel.app/",
+    accent: "dark",
+  },
+  {
+    number: "11",
+    title: "Item-Item-Mirror",
+    subtitle: "Training Item-Item-Mirror",
+    description:
+    "Assessment untuk mengukur pemahaman mengenai Item-Item-Mirror.",
+    type: "PRE TEST",
+    href: "https://item-item-mirror.vercel.app/pre-test",
     accent: "blue",
   },
 ];

@@ -4,22 +4,22 @@ import PageAnimations from "@/components/PageAnimations";
 const postTests = [
   {
     number: "01",
-    title: "5S & 3T",
-    subtitle: "Training 5S & 3T",
+    title: "Defect Injection Knowledge",
+    subtitle: "Training Defect Injection Knowledge",
     description:
-      "Evaluasi pemahaman setelah mengikuti training 5S & 3T.",
-    type: "POST-TEST",
-    href: "https://forms.gle/hsgG3CpFbQLPCpsP6",
+      "Assessment untuk mengukur pemahaman mengenai Defect Injection Knowledge.",
+    type: "POST TEST",
+    href: "https://defect-injection-knowledge.vercel.app/posttest",
     accent: "blue",
   },
   {
     number: "02",
-    title: "Fishbone Diagram",
-    subtitle: "Training Fishbone Diagram",
+    title: "Defect Assembly Knowledge",
+    subtitle: "Training Defect Assembly Knowledge",
     description:
-      "Evaluasi pemahaman mengenai Fishbone Diagram dan root cause analysis setelah training.",
+      "Evaluasi pemahaman mengenai Defect Assembly Knowledge setelah training.",
     type: "POST-TEST",
-    href: "https://forms.gle/E83kotMN2dBrEc5i6",
+    href: "https://defect-assembly-knowledge.vercel.app/posttest",
     accent: "dark",
   },
   {
@@ -34,6 +34,56 @@ const postTests = [
   },
   {
     number: "04",
+    title: "Clasification Class Product",
+    subtitle: "Training Clasification Class Product",
+    description:
+    "Assessment untuk mengukur pemahaman mengenai Clasification Class Product.",
+    type: "POST TEST",
+    href: "forms.gle/59DS6cjiDkeBsw8UA",
+    accent: "dark",
+  },
+  {
+    number: "05",
+    title: "Horenso",
+    subtitle: "Training Horenso",
+    description:
+    "Assessment untuk mengukur pemahaman mengenai Horenso.",
+    type: "POST TEST",
+    href: "https://forms.gle/k8XdaKkVc13Dpaaj7",
+    accent: "blue",
+  },
+  {
+    number: "06",
+    title: "5S & 3T",
+    subtitle: "Training 5S & 3T",
+    description:
+      "Evaluasi pemahaman setelah mengikuti training 5S & 3T.",
+    type: "POST-TEST",
+    href: "https://forms.gle/hsgG3CpFbQLPCpsP6",
+    accent: "blue",
+  },
+  {
+    number: "07",
+    title: "Fishbone Diagram",
+    subtitle: "Training Fishbone Diagram",
+    description:
+      "Evaluasi pemahaman mengenai Fishbone Diagram dan root cause analysis setelah training.",
+    type: "POST-TEST",
+    href: "https://forms.gle/E83kotMN2dBrEc5i6",
+    accent: "dark",
+  },
+  {
+    number: "08",
+    title: "Basic Analysis 5Why",
+    subtitle: "Training Basic Analysis 5Why",
+    description:
+      "Assessment untuk mengukur pemahaman mengenai Basic Analysis 5Why.",
+    type: "PRE & POST TEST",
+    href: "https://basic-analysis-5-why.vercel.app/",
+    accent: "blue",
+  },
+  {
+    number: "09",
     title: "Standar Tolerance",
     subtitle: "Training Basic Standar Tolerance",
     description:
@@ -43,7 +93,7 @@ const postTests = [
     accent: "dark",
   },
   {
-    number: "05",
+    number: "10",
     title: "Basic 14 Q Principle",
     subtitle: "Training Basic 14 Q Principle",
     description:
@@ -53,7 +103,7 @@ const postTests = [
     accent: "blue",
   },
   {
-    number: "06",
+    number: "11",
     title: "ITEM - ITEM MIRROR",
     subtitle: "Training terkait ITEM - ITEM MIRROR",
     description:
@@ -61,36 +111,6 @@ const postTests = [
       type: "POST TEST",
     href: "https://item-item-mirror.vercel.app/post-test/",
     accent: "dark",
-  },
-    {
-    number: "07",
-    title: "Clasification Class Product",
-    subtitle: "Training Clasification Class Product",
-    description:
-    "Assessment untuk mengukur pemahaman mengenai Clasification Class Product.",
-    type: "POST TEST",
-    href: "https://forms.gle/59DS6cjiDkeBsw8UA",
-    accent: "blue",
-  },
-  {
-    number: "08",
-    title: "Horenso",
-    subtitle: "Training Horenso",
-    description:
-    "Assessment untuk mengukur pemahaman mengenai Horenso.",
-    type: "POST TEST",
-    href: "https://forms.gle/k8XdaKkVc13Dpaaj7",
-    accent: "dark",
-  },
-  {
-    number: "09",
-    title: "Basic Analysis 5Why",
-    subtitle: "Training Basic Analysis 5Why",
-    description:
-      "Assessment untuk mengukur pemahaman mengenai Basic Analysis 5Why.",
-    type: "PRE & POST TEST",
-    href: "https://basic-analysis-5-why.vercel.app/",
-    accent: "blue",
   },
 ];
 
