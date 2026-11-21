@@ -3,6 +3,19 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+
+  color-scheme: light;
+
+  --navy: #173b67;
+  --navy-dark: #102d50;
+  --blue: #2864a5;
+  --blue-light: #3977ad;
+  --text: #172b45;
+  --muted: #718096;
+  --line: #e4eaf1;
+  --bg: #f4f7fb;
+  --white: #ffffff;
+  --green: #258454;
 }
 
 @theme inline {
@@ -20,7 +33,693 @@
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background:
+    radial-gradient(
+      ellipse at 50% -20%,
+      rgba(215, 230, 247, 0.55),
+      transparent 48%
+    ),
+    var(--bg);
+
+  color: var(--text);
+  font-family: 'DM Sans', Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+}
+
+button:focus-visible,
+input:focus-visible {
+  outline: 3px solid rgba(40, 100, 165, 0.25);
+  outline-offset: 2px;
+}
+
+.page-shell {
+  width: min(1120px, 100%);
+  margin: 0 auto;
+  padding: 0 28px 46px;
+}
+
+/* =========================================
+   2. HEADER / BRANDING
+========================================= */
+
+.topbar {
+  min-height: 82px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(220, 229, 239, 0.9);
+  gap: 15px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.brand-icon {
+  width: 43px;
+  height: 43px;
+  display: grid;
+  place-items: center;
+  color: white;
+  background: linear-gradient(145deg, #2864a5, #173b67);
+  border-radius: 11px;
+  box-shadow: 0 4px 10px rgba(23, 59, 103, 0.15);
+}
+
+.brand-info {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.brand-info strong {
+  color: var(--navy);
+  font-family: 'Manrope', sans-serif;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+}
+
+.brand-info span {
+  color: #8190a2;
+  font-size: 10px;
+}
+
+.header-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 12px;
+  border: 1px solid #d9eee1;
+  border-radius: 30px;
+  background: #eaf6ef;
+  color: #347653;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+}
+
+.status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--green);
+}
+
+/* =========================================
+   3. HERO SECTION
+========================================= */
+
+.hero {
+  padding: 58px 0 36px;
+  max-width: 740px;
+}
+
+.eyebrow {
+  color: var(--blue);
+  font-size: 10px;
+  letter-spacing: 1.8px;
+  font-weight: 800;
+  margin-bottom: 15px;
+}
+
+.hero h1 {
+  font: 800 clamp(34px, 5vw, 50px)/1.13 'Manrope', sans-serif;
+  letter-spacing: -2px;
+  margin: 0;
+  color: #142b47;
+}
+
+.hero h1 span {
+  color: var(--blue-light);
+}
+
+.hero p {
+  max-width: 620px;
+  margin: 17px 0 0;
+  color: var(--muted);
+  line-height: 1.75;
+  font-size: 14px;
+}
+
+/* =========================================
+   4. WORKSPACE CARD
+========================================= */
+
+.workspace {
+  background: rgba(255, 255, 255, 0.96);
+  border: 1px solid #e3eaf2;
+  border-radius: 17px;
+  padding: 25px;
+  margin-bottom: 18px;
+  box-shadow: 0 8px 26px rgba(24, 48, 79, 0.045);
+}
+
+.section-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 19px;
+}
+
+.section-heading h2 {
+  font: 800 17px 'Manrope', sans-serif;
+  margin: 0 0 5px;
+  letter-spacing: -0.35px;
+  color: #1b3452;
+}
+
+.section-heading p {
+  margin: 0;
+  color: #8190a2;
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+.step-pill {
+  background: #edf3fa;
+  color: #386a9d;
+  font-size: 9px;
+  letter-spacing: 1px;
+  font-weight: 800;
+  padding: 7px 10px;
+  border-radius: 6px;
+  white-space: nowrap;
+}
+
+/* =========================================
+   5. UPLOAD DROPZONE
+========================================= */
+
+.dropzone {
+  border: 1.5px dashed #bdcddd;
+  border-radius: 13px;
+  min-height: 226px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(180deg, #fbfdff, #f8fafd);
+  transition:
+    border-color 0.2s,
+    background 0.2s,
+    box-shadow 0.2s;
+}
+
+.dropzone.dragging {
+  border-color: #4c83b9;
+  background: #f0f6fd;
+  box-shadow: inset 0 0 0 3px rgba(76, 131, 185, 0.06);
+}
+
+.dropzone.has-file {
+  background: #f8fdf9;
+  border-color: #9ccdb0;
+}
+
+.upload-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 27px 16px;
+  gap: 9px;
+}
+
+.upload-icon {
+  width: 56px;
+  height: 56px;
+  display: grid;
+  place-items: center;
+  border-radius: 17px;
+  background: #eaf1f9;
+  color: #326da6;
+  margin-bottom: 4px;
+}
+
+.upload-icon.success {
+  background: #e8f6ed;
+  color: #31845a;
+}
+
+.upload-content strong {
+  font-size: 14px;
+  font-weight: 700;
+  color: #243b56;
+  overflow-wrap: anywhere;
+}
+
+.upload-content span {
+  color: #7c8b9d;
+  font-size: 12px;
+}
+
+.upload-content small {
+  color: #9aa7b6;
+  font-size: 10px;
+  margin-top: 2px;
+}
+
+/* =========================================
+   6. BUTTONS
+========================================= */
+
+.primary-button,
+.download-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 0;
+  background: var(--navy);
+  color: white;
+  border-radius: 9px;
+  padding: 11px 18px;
+  font-size: 12px;
+  font-weight: 700;
+  margin-top: 8px;
+  box-shadow: 0 4px 10px rgba(23, 59, 103, 0.13);
+  transition: 0.2s;
+}
+
+.primary-button:hover,
+.download-button:hover {
+  background: var(--navy-dark);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 14px rgba(23, 59, 103, 0.18);
+}
+
+.file-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 7px;
+}
+
+.secondary-button {
+  border: 1px solid #d7e1ec;
+  background: white;
+  color: var(--navy);
+  border-radius: 8px;
+  padding: 8px 13px;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.text-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  border: 0;
+  background: transparent;
+  color: #8a5960;
+  font-size: 11px;
+}
+
+/* =========================================
+   7. INFO & ERROR MESSAGE
+========================================= */
+
+.info-strip {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #687b90;
+  background: #f4f7fb;
+  border: 1px solid #edf1f6;
+  border-radius: 9px;
+  padding: 11px 13px;
+  margin-top: 14px;
+  font-size: 11px;
+  line-height: 1.55;
+}
+
+.info-strip svg {
+  flex: 0 0 auto;
+  color: #527aa5;
+}
+
+.error-message {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  margin-top: 13px;
+  padding: 12px 14px;
+  color: #9b3434;
+  background: #fff1f1;
+  border: 1px solid #f5d2d2;
+  border-radius: 9px;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+/* =========================================
+   8. COLUMN LIST
+========================================= */
+
+.rules-section {
+  padding-bottom: 22px;
+}
+
+.column-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 9px;
+}
+
+.column-item {
+  min-width: 0;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  border: 1px solid #e9eef4;
+  border-radius: 9px;
+  padding: 8px 11px;
+  background: #fff;
+  font-size: 11px;
+  font-weight: 600;
+  color: #344b65;
+  transition:
+    border-color 0.15s,
+    background 0.15s;
+}
+
+.column-item:hover {
+  border-color: #cbd9e8;
+  background: #fbfdff;
+}
+
+.column-number {
+  flex: 0 0 25px;
+  width: 25px;
+  height: 25px;
+  display: grid;
+  place-items: center;
+  color: #66819e;
+  background: #f0f4f8;
+  border-radius: 7px;
+  font-size: 9px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+
+.column-label {
+  min-width: 0;
+  line-height: 1.35;
+}
+
+.convert-tag {
+  flex: 0 0 auto;
+  margin-left: auto;
+  color: #32724f;
+  background: #eaf6ee;
+  border: 1px solid #d9eee1;
+  padding: 4px 7px;
+  border-radius: 5px;
+  font-size: 9px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.rule-note {
+  color: #78899c;
+  background: #f7f9fc;
+  border-left: 3px solid #8eaccb;
+  border-radius: 0 7px 7px 0;
+  font-size: 11px;
+  line-height: 1.65;
+  padding: 10px 12px;
+  margin: 14px 0 0;
+}
+
+/* =========================================
+   9. PREVIEW TABLE
+========================================= */
+
+.table-wrap {
+  width: 100%;
+  height: 520px;
+  overflow-x: auto;
+  overflow-y: auto;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  position: relative;
+  scrollbar-width: thin;
+  scrollbar-color: #bdcddd #f4f7fb;
+}
+
+/* Scrollbar untuk Chrome, Edge, dan Safari */
+.table-wrap::-webkit-scrollbar {
+  width: 9px;
+  height: 9px;
+}
+
+.table-wrap::-webkit-scrollbar-track {
+  background: #f4f7fb;
+}
+
+.table-wrap::-webkit-scrollbar-thumb {
+  background: #bdcddd;
+  border-radius: 10px;
+}
+
+.table-wrap::-webkit-scrollbar-thumb:hover {
+  background: #91a9c0;
+}
+
+table {
+  width: 100%;
+  min-width: 1100px;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 11px;
+}
+
+thead th {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  color: #52677e;
+  background: #f4f7fb;
+  text-align: left;
+  font-size: 10px;
+  font-weight: 800;
+  padding: 12px 10px;
+  white-space: nowrap;
+  box-shadow: 0 1px 0 #e4eaf1;
+}
+
+td {
+  padding: 11px 10px;
+  border-top: 1px solid #edf0f4;
+  white-space: nowrap;
+  color: #34475d;
+  background: white;
+}
+
+tbody tr:hover td {
+  background: #fafcff;
+}
+
+.numeric {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+/* =========================================
+   10. DOWNLOAD SECTION
+========================================= */
+
+.download-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  margin-top: 17px;
+  padding-top: 16px;
+  border-top: 1px solid #edf1f5;
+}
+
+.download-row strong {
+  display: block;
+  font-size: 12px;
+  color: #2c435d;
+}
+
+.download-row span {
+  display: block;
+  color: #8492a3;
+  font-size: 10px;
+  margin-top: 4px;
+}
+
+.download-button {
+  margin: 0;
+  padding: 12px 17px;
+  white-space: nowrap;
+}
+
+/* =========================================
+   11. FOOTER
+========================================= */
+
+footer {
+  text-align: center;
+  color: #9aa7b6;
+  font-size: 10px;
+  padding: 15px 0 0;
+}
+
+footer span {
+  padding: 0 5px;
+}
+
+/* =========================================
+   12. LOADING ANIMATION
+========================================= */
+
+.spinning {
+  animation: spin 1.2s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* =========================================
+   13. TABLET & MOBILE RESPONSIVE
+========================================= */
+
+@media (max-width: 700px) {
+  .page-shell {
+    padding: 0 15px 30px;
+  }
+
+  /* Header */
+  .topbar {
+    min-height: 70px;
+  }
+
+  .brand {
+    gap: 9px;
+  }
+
+  .brand-icon {
+    width: 38px;
+    height: 38px;
+  }
+
+  .brand-info strong {
+    font-size: 11px;
+  }
+
+  .brand-info span {
+    font-size: 9px;
+  }
+
+  .header-status {
+    font-size: 8px;
+    padding: 7px 9px;
+  }
+
+  /* Hero */
+  .hero {
+    padding: 39px 0 27px;
+  }
+
+  .hero h1 {
+    font-size: clamp(31px, 9vw, 42px);
+    letter-spacing: -1.35px;
+  }
+
+  .hero p {
+    font-size: 12px;
+  }
+
+  /* Workspace */
+  .workspace {
+    padding: 18px 15px;
+    border-radius: 13px;
+  }
+
+  .section-heading h2 {
+    font-size: 15px;
+  }
+
+  .section-heading p {
+    font-size: 10px;
+  }
+
+  .dropzone {
+    min-height: 215px;
+  }
+
+  /* Column list */
+  .column-list {
+    grid-template-columns: 1fr;
+    gap: 7px;
+  }
+
+  .column-item {
+    min-height: 42px;
+  }
+
+  /* Preview */
+  .table-wrap {
+    height: 520px;
+  }
+
+  /* Download */
+  .download-row {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .download-button {
+    width: 100%;
+  }
+}
+
+/* =========================================
+   14. SMALL MOBILE
+========================================= */
+
+@media (max-width: 380px) {
+  .page-shell {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .brand-info strong {
+    font-size: 10px;
+  }
+
+  .brand-info span {
+    font-size: 8px;
+  }
+
+  .header-status {
+    font-size: 7px;
+    padding: 6px 7px;
+    gap: 5px;
+  }
+
+  .column-item {
+    gap: 8px;
+    padding: 7px 8px;
+  }
+
+  .convert-tag {
+    font-size: 8px;
+    padding: 4px 5px;
+  }
 }

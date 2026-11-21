@@ -14,14 +14,6 @@ const navItems = [
     name: "Modules",
     href: "/modules",
   },
-  {
-    name: "Result",
-    href: "/result",
-  },
-  {
-    name: "Contact",
-    href: "/contact",
-  },
 ];
 
 const assessmentItems = [
@@ -35,6 +27,11 @@ const assessmentItems = [
     href: "/post-test",
     description: "Evaluasi pemahaman setelah training.",
   },
+  {
+    name: "Result",
+    href: "/result",
+    description: "Lihat dan kelola hasil assessment.",
+  },
 ];
 
 export default function Navbar() {
@@ -45,16 +42,16 @@ export default function Navbar() {
 
   const isHomePage = pathname === "/";
 
-  const isAssessmentActive =
-    pathname === "/pre-test" ||
-    pathname === "/post-test";
+  const isAssessmentActive = assessmentItems.some(
+    (item) => pathname === item.href || pathname.startsWith(`${item.href}/`)
+  );
 
   const isActive = (href: string) => {
     if (href === "/") {
       return pathname === "/";
     }
 
-    return pathname.startsWith(href);
+    return pathname === href || pathname.startsWith(`${href}/`);
   };
 
   const closeMenus = () => {
@@ -62,17 +59,24 @@ export default function Navbar() {
     setAssessmentOpen(false);
   };
 
+  const desktopLinkClass = (href: string) =>
+    isActive(href)
+      ? "rounded-[10px] bg-slate-100 px-4 py-2.5 text-[14px] font-semibold text-[#0b1220]"
+      : "rounded-[10px] px-4 py-2.5 text-[14px] font-semibold text-slate-500 transition-colors hover:bg-slate-50 hover:text-[#0b1220]";
+
+  const mobileLinkClass = (href: string) =>
+    isActive(href)
+      ? "rounded-[9px] bg-slate-100 px-4 py-3 text-[14px] font-semibold text-[#0b1220]"
+      : "rounded-[9px] px-4 py-3 text-[14px] font-semibold text-slate-600 transition-colors hover:bg-slate-50";
+
   return (
     <header className="sticky top-0 z-50 border-b border-slate-200 bg-white">
-
       <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
 
-        {/* NAVBAR */}
-
+        {/* NAVBAR DESKTOP */}
         <div className="flex h-[76px] items-center justify-between">
 
           {/* LOGO */}
-
           <Link
             href="/"
             onClick={closeMenus}
@@ -94,39 +98,26 @@ export default function Navbar() {
           </Link>
 
           {/* DESKTOP NAVIGATION */}
-
           <nav className="hidden items-center gap-0.5 md:flex">
 
             {/* HOME & MODULES */}
-
-            {navItems.slice(0, 3).map((item) => {
-              const active = isActive(item.href);
-
-              return (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className={
-                    active
-                      ? "rounded-[10px] bg-slate-100 px-4 py-2.5 text-[14px] font-semibold text-[#0b1220]"
-                      : "rounded-[10px] px-4 py-2.5 text-[14px] font-semibold text-slate-500 transition-colors hover:bg-slate-50 hover:text-[#0b1220]"
-                  }
-                >
-                  {item.name}
-                </Link>
-              );
-            })}
+            {navItems.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                onClick={closeMenus}
+                className={desktopLinkClass(item.href)}
+              >
+                {item.name}
+              </Link>
+            ))}
 
             {/* ASSESSMENT DROPDOWN */}
-
             <div className="relative">
-
               <button
                 type="button"
                 aria-expanded={assessmentOpen}
-                onClick={() =>
-                  setAssessmentOpen((prev) => !prev)
-                }
+                onClick={() => setAssessmentOpen((prev) => !prev)}
                 className={
                   isAssessmentActive || assessmentOpen
                     ? "flex items-center gap-2 rounded-[10px] bg-slate-100 px-4 py-2.5 text-[14px] font-semibold text-[#0b1220]"
@@ -152,21 +143,17 @@ export default function Navbar() {
                 </svg>
               </button>
 
-              {/* DROPDOWN MENU */}
-
+              {/* ASSESSMENT MENU */}
               {assessmentOpen && (
-                <div className="absolute left-0 top-full z-50 mt-2 w-[250px] overflow-hidden rounded-xl border border-slate-200 bg-white p-2 shadow-xl">
-
+                <div className="absolute left-0 top-full z-50 mt-2 w-[270px] overflow-hidden rounded-xl border border-slate-200 bg-white p-2 shadow-xl">
                   {assessmentItems.map((item) => {
-                    const active = pathname === item.href;
+                    const active = isActive(item.href);
 
                     return (
                       <Link
                         key={item.href}
                         href={item.href}
-                        onClick={() =>
-                          setAssessmentOpen(false)
-                        }
+                        onClick={closeMenus}
                         className={`block rounded-lg px-4 py-3 transition-colors ${
                           active
                             ? "bg-blue-50 text-blue-600"
@@ -183,39 +170,37 @@ export default function Navbar() {
                       </Link>
                     );
                   })}
-
                 </div>
               )}
-
             </div>
 
-            {/* CONTACT */}
+            {/* ERP TO GSHEET */}
+            <Link
+              href="/erp-to-gsheet"
+              onClick={closeMenus}
+              className={desktopLinkClass("/erp-to-gsheet")}
+            >
+              ERP To Gsheet
+            </Link>
 
+            {/* CONTACT */}
             <Link
               href="/contact"
-              className={
-                isActive("/contact")
-                  ? "rounded-[10px] bg-slate-100 px-4 py-2.5 text-[14px] font-semibold text-[#0b1220]"
-                  : "rounded-[10px] px-4 py-2.5 text-[14px] font-semibold text-slate-500 transition-colors hover:bg-slate-50 hover:text-[#0b1220]"
-              }
+              onClick={closeMenus}
+              className={desktopLinkClass("/contact")}
             >
               Contact
             </Link>
-
           </nav>
 
-          {/* RIGHT BUTTON */}
-
+          {/* RIGHT BUTTON DESKTOP */}
           {isHomePage ? (
             <Link
               href="/modules"
               className="hidden items-center gap-2 rounded-[10px] bg-[#0b1220] px-5 py-3 text-[14px] font-bold text-white transition-colors hover:bg-blue-600 md:flex"
             >
               Start Training
-
-              <span className="text-[16px] leading-none">
-                →
-              </span>
+              <span className="text-[16px] leading-none">→</span>
             </Link>
           ) : (
             <Link
@@ -227,7 +212,6 @@ export default function Navbar() {
           )}
 
           {/* MOBILE MENU BUTTON */}
-
           <button
             type="button"
             aria-label={
@@ -274,49 +258,33 @@ export default function Navbar() {
               </svg>
             )}
           </button>
-
         </div>
 
         {/* MOBILE NAVIGATION */}
-
         {isOpen && (
           <div className="border-t border-slate-200 py-3 md:hidden">
-
             <nav className="flex flex-col gap-0.5">
 
               {/* HOME & MODULES */}
-
-              {navItems.slice(0, 3).map((item) => {
-                const active = isActive(item.href);
-
-                return (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    onClick={closeMenus}
-                    className={
-                      active
-                        ? "rounded-[9px] bg-slate-100 px-4 py-3 text-[14px] font-semibold text-[#0b1220]"
-                        : "rounded-[9px] px-4 py-3 text-[14px] font-semibold text-slate-600 hover:bg-slate-50"
-                    }
-                  >
-                    {item.name}
-                  </Link>
-                );
-              })}
+              {navItems.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  onClick={closeMenus}
+                  className={mobileLinkClass(item.href)}
+                >
+                  {item.name}
+                </Link>
+              ))}
 
               {/* MOBILE ASSESSMENT */}
-
               <div>
-
                 <button
                   type="button"
                   aria-expanded={assessmentOpen}
-                  onClick={() =>
-                    setAssessmentOpen((prev) => !prev)
-                  }
+                  onClick={() => setAssessmentOpen((prev) => !prev)}
                   className={`flex w-full items-center justify-between rounded-[9px] px-4 py-3 text-[14px] font-semibold transition-colors ${
-                    isAssessmentActive
+                    isAssessmentActive || assessmentOpen
                       ? "bg-slate-100 text-[#0b1220]"
                       : "text-slate-600 hover:bg-slate-50"
                   }`}
@@ -340,13 +308,11 @@ export default function Navbar() {
                   </svg>
                 </button>
 
-                {/* MOBILE DROPDOWN */}
-
+                {/* MOBILE ASSESSMENT MENU */}
                 {assessmentOpen && (
                   <div className="ml-4 mt-1 flex flex-col gap-1 border-l-2 border-slate-200 pl-3">
-
                     {assessmentItems.map((item) => {
-                      const active = pathname === item.href;
+                      const active = isActive(item.href);
 
                       return (
                         <Link
@@ -359,34 +325,37 @@ export default function Navbar() {
                               : "text-slate-500 hover:bg-slate-50 hover:text-[#0b1220]"
                           }`}
                         >
-                          {item.name}
+                          <div>{item.name}</div>
+                          <div className="mt-1 text-[11px] font-normal text-slate-400">
+                            {item.description}
+                          </div>
                         </Link>
                       );
                     })}
-
                   </div>
                 )}
-
               </div>
 
-              {/* CONTACT */}
+              {/* ERP TO GSHEET MOBILE */}
+              <Link
+                href="/erp-to-gsheet"
+                onClick={closeMenus}
+                className={mobileLinkClass("/erp-to-gsheet")}
+              >
+                ERP TO GSHEET
+              </Link>
 
+              {/* CONTACT MOBILE */}
               <Link
                 href="/contact"
                 onClick={closeMenus}
-                className={
-                  isActive("/contact")
-                    ? "rounded-[9px] bg-slate-100 px-4 py-3 text-[14px] font-semibold text-[#0b1220]"
-                    : "rounded-[9px] px-4 py-3 text-[14px] font-semibold text-slate-600 hover:bg-slate-50"
-                }
+                className={mobileLinkClass("/contact")}
               >
                 Contact
               </Link>
-
             </nav>
 
             {/* MOBILE RIGHT BUTTON */}
-
             {isHomePage ? (
               <Link
                 href="/modules"
@@ -405,10 +374,8 @@ export default function Navbar() {
                 Back to Home
               </Link>
             )}
-
           </div>
         )}
-
       </div>
     </header>
   );
