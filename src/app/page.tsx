@@ -10,6 +10,7 @@ const modules = [
     description:
       "Automotive Quality Management System dan persyaratan khusus industri otomotif.",
     accent: "blue",
+    href: "https://docs.google.com/presentation/d/1F3x4D65uryEizefbd1kUbKQx7dGv-p4I/edit?usp=drive_link&ouid=106738956518567923854&rtpof=true&sd=true",
   },
   {
     number: "02",
@@ -18,6 +19,7 @@ const modules = [
     description:
       "Measurement System Analysis untuk memastikan sistem pengukuran dapat dipercaya.",
     accent: "dark",
+    href: "https://docs.google.com/presentation/d/19kvIcD3qs165UwL9Km6yePrOS6QlfTIL/edit?usp=drive_link&ouid=106738956518567923854&rtpof=true&sd=true",
   },
   {
     number: "03",
@@ -26,6 +28,7 @@ const modules = [
     description:
       "Statistical Process Control untuk monitoring dan pengendalian variasi proses.",
     accent: "blue",
+    href: "https://docs.google.com/presentation/d/1FCYty0a39maPJVMrcLggXWiToyFXU91e/edit?usp=sharing&ouid=106738956518567923854&rtpof=true&sd=true",
   },
   {
     number: "04",
@@ -34,6 +37,7 @@ const modules = [
     description:
       "Tools untuk problem solving, root cause analysis, dan continuous improvement.",
     accent: "dark",
+    href: "https://docs.google.com/presentation/d/1IEeVBH1eZpGeloXYxpzjCffL4toCwIj3/edit?usp=drive_link&ouid=106738956518567923854&rtpof=true&sd=true",
   },
 ];
 
@@ -552,16 +556,21 @@ function ModuleCard({
   category,
   description,
   accent,
+  href,
 }: {
   number: string;
   title: string;
   category: string;
   description: string;
   accent: string;
+  href: string;
 }) {
   return (
-    <Link data-card
-      href="/modules"
+    <Link
+      data-card
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
       className="
         group
         relative
