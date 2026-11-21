@@ -50,3 +50,15 @@ export async function POST(request: Request) {
     );
   }
 }
+
+export const dynamic = "force-dynamic";
+
+
+export async function GET() {
+  return NextResponse.json({
+    success: true,
+    message: "Contact API is running!",
+    endpoint: "/api/contacts",
+    methods: ["GET", "POST"],
+  });
+}
