@@ -382,7 +382,7 @@ export default function Home() {
 
         {/* MODULE GRID */}
 
-        <div data-card-group className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <div data-card-group className="mt-12 grid grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-4">
 
           {modules.map((module) => (
             <ModuleCard
@@ -478,7 +478,7 @@ export default function Home() {
 
             {/* RIGHT */}
 
-            <div data-card-group className="grid gap-4 sm:grid-cols-2">
+            <div data-card-group className="grid grid-cols-2 gap-3 sm:gap-4">
 
               <AssessmentCard
                 number="01"
@@ -579,7 +579,8 @@ function ModuleCard({
         border
         border-slate-200
         bg-white
-        p-6
+        p-3
+        sm:p-6
         transition
         duration-300
         hover:-translate-y-1
@@ -637,8 +638,10 @@ function ModuleCard({
 
       <p
         className="
-          mt-10
-          text-[9px]
+          mt-6
+          sm:mt-10
+          text-[8px]
+          sm:text-[9px]
           font-black
           tracking-[0.2em]
           text-slate-400
@@ -652,7 +655,8 @@ function ModuleCard({
       <h3
         className="
           mt-2
-          text-xl
+          text-base
+          sm:text-xl
           font-black
           tracking-tight
           text-[#0b1220]
@@ -663,7 +667,7 @@ function ModuleCard({
 
       {/* DESCRIPTION */}
 
-      <p className="mt-3 text-sm leading-6 text-slate-500">
+      <p className="mt-2 text-xs leading-5 text-slate-500 sm:mt-3 sm:text-sm sm:leading-6">
         {description}
       </p>
 
@@ -671,7 +675,8 @@ function ModuleCard({
 
       <div
         className="
-          mt-8
+          mt-5
+          sm:mt-8
           flex
           items-center
           justify-between
@@ -681,7 +686,7 @@ function ModuleCard({
         "
       >
 
-        <span className="text-[10px] font-bold text-slate-400">
+        <span className="text-[8px] font-bold text-slate-400 sm:text-[10px]">
           LEARNING MODULE
         </span>
 
@@ -726,7 +731,8 @@ function AssessmentCard({
         border
         border-white/10
         bg-white/[0.04]
-        p-6
+        p-4
+        sm:p-6
         transition
         duration-300
         hover:-translate-y-1
@@ -765,19 +771,19 @@ function AssessmentCard({
 
       {/* TITLE */}
 
-      <h3 className="mt-10 text-2xl font-black">
+      <h3 className="mt-6 text-xl font-black sm:mt-10 sm:text-2xl">
         {title}
       </h3>
 
       {/* DESCRIPTION */}
 
-      <p className="mt-3 text-sm leading-6 text-slate-400">
+      <p className="mt-3 text-xs leading-5 text-slate-400 sm:text-sm sm:leading-6">
         {description}
       </p>
 
       {/* LINK */}
 
-      <div className="mt-7 text-xs font-bold text-blue-400">
+      <div className="mt-5 text-[10px] font-bold text-blue-400 sm:mt-7 sm:text-xs">
         Start assessment →
       </div>
 

@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
@@ -6,10 +5,6 @@ import type { FormEvent } from "react";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import PageAnimations from "@/components/PageAnimations";
-
-/* =========================================================
-   TYPES
-========================================================= */
 
 type Category = "BEI" | "HMMI";
 
@@ -55,10 +50,6 @@ const emptyForm: ContactForm = {
   category: "BEI",
 };
 
-/* =========================================================
-   API HELPER
-========================================================= */
-
 async function contactApi(payload: Record<string, unknown>) {
   const response = await fetch("/api/contacts", {
     method: "POST",
@@ -77,10 +68,6 @@ async function contactApi(payload: Record<string, unknown>) {
 
   return result;
 }
-
-/* =========================================================
-   WHATSAPP HELPER
-========================================================= */
 
 function whatsappNumber(phone: string) {
   let number = phone.replace(/\D/g, "");
@@ -131,12 +118,11 @@ function ContactTable({
 
   return (
     <section className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition hover:shadow-md">
-      {/* TOP ACCENT */}
+      
       <div className={`h-1.5 ${accent}`} />
 
       <div className="p-5 sm:p-7">
 
-        {/* HEADER */}
         <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
           <div>
             <div className="flex flex-wrap items-center gap-3">
@@ -160,21 +146,11 @@ function ContactTable({
             </p>
           </div>
 
-          <button
-            type="button"
-            onClick={onAdd}
-            className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#0b1220] px-5 py-3 text-sm font-bold text-white transition hover:bg-blue-700"
-          >
-            <span className="text-lg">+</span>
-            Tambah Kontak
-          </button>
         </div>
 
-        {/* SEARCH & FILTER */}
-        <div className="mt-6 grid gap-3 md:grid-cols-[1fr_260px]">
+        <div className="mt-6 grid min-w-0 grid-cols-[minmax(0,1fr)_minmax(0,1fr)_44px] items-center gap-2 sm:gap-3 md:grid-cols-[minmax(0,1fr)_260px_48px]">
 
-          {/* SEARCH */}
-          <div className="relative">
+          <div className="relative min-w-0">
             <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-lg text-slate-400">
               ⌕
             </span>
@@ -184,23 +160,22 @@ function ContactTable({
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder={`Cari nama, nomor, email, atau jabatan ${category}...`}
-              className="w-full rounded-xl border border-slate-200 bg-slate-50 py-3 pl-11 pr-4 text-sm outline-none transition focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-500/10"
+              className="w-full min-w-0 rounded-xl border border-slate-200 bg-slate-50 py-3 pl-9 pr-2 text-xs outline-none transition focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-500/10 sm:pl-11 sm:pr-4 sm:text-sm"
             />
           </div>
 
-          {/* FILTER */}
-          <div className="relative">
-            <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-sm text-slate-400">
+          <div className="relative min-w-0">
+            <span className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-sm text-slate-400 sm:left-4">
               ▤
             </span>
 
             <select
               value={filter}
               onChange={(e) => setFilter(e.target.value)}
-              className="w-full appearance-none rounded-xl border border-slate-200 bg-white py-3 pl-11 pr-9 text-sm outline-none transition focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10"
+              className="w-full min-w-0 appearance-none rounded-xl border border-slate-200 bg-white py-3 pl-8 pr-5 text-xs outline-none transition focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 sm:pl-11 sm:pr-9 sm:text-sm"
             >
               <option value="ALL">
-                Semua Organisasi / Jabatan
+                Department
               </option>
 
               {filterOptions.map((option) => (
@@ -214,9 +189,18 @@ function ContactTable({
               ▼
             </span>
           </div>
+
+          <button
+            type="button"
+            onClick={onAdd}
+            title="Tambah kontak"
+            aria-label={`Tambah kontak ${category}`}
+            className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#0b1220] text-2xl font-medium leading-none text-white transition hover:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-500/20"
+          >
+            +
+          </button>
         </div>
 
-        {/* FILTER INFO */}
         {(search || filter !== "ALL") && (
           <div className="mt-3 flex flex-wrap items-center justify-between gap-2">
             <p className="text-xs text-slate-500">
@@ -236,7 +220,6 @@ function ContactTable({
           </div>
         )}
 
-        {/* TABLE */}
         <div className="mt-5 overflow-x-auto rounded-xl border border-slate-200">
           <table className="w-full min-w-[1000px] text-left text-sm">
             <thead className="bg-[#0b1220] text-white">
@@ -269,7 +252,6 @@ function ContactTable({
                       {contact.name}
                     </td>
 
-                    {/* PHONE */}
                     <td className="px-4 py-4">
                       <a
                         href={`tel:${contact.phone.replace(/\s/g, "")}`}
@@ -279,7 +261,6 @@ function ContactTable({
                       </a>
                     </td>
 
-                    {/* EMAIL */}
                     <td className="px-4 py-4">
                       {contact.email ? (
                         <a
@@ -293,16 +274,13 @@ function ContactTable({
                       )}
                     </td>
 
-                    {/* ORGANIZATION */}
                     <td className="px-4 py-4 text-slate-600">
                       {contact.organization || "-"}
                     </td>
 
-                    {/* ACTION */}
                     <td className="px-4 py-4">
                       <div className="flex items-center justify-center gap-2">
 
-                        {/* WHATSAPP */}
                         <a
                           href={whatsappLink(contact)}
                           target="_blank"
@@ -321,7 +299,6 @@ function ContactTable({
                           Chat
                         </a>
 
-                        {/* EDIT */}
                         <button
                           type="button"
                           onClick={() => onEdit(contact)}
@@ -331,7 +308,6 @@ function ContactTable({
                           Edit
                         </button>
 
-                        {/* DELETE */}
                         <button
                           type="button"
                           onClick={() => onDelete(contact)}
@@ -368,13 +344,8 @@ function ContactTable({
           </table>
         </div>
 
-        {/* TABLE FOOTER */}
         <div className="mt-4 flex flex-wrap items-center justify-between gap-2">
-          <p className="text-xs text-slate-400">
-            Contact Category: {category}
-          </p>
-
-          <p className="text-xs font-semibold text-slate-500">
+                    <p className="text-xs font-semibold text-slate-500">
             Total: {data.length} Contact(s)
           </p>
         </div>
@@ -382,10 +353,6 @@ function ContactTable({
     </section>
   );
 }
-
-/* =========================================================
-   MAIN CONTACT PAGE
-========================================================= */
 
 export default function ContactPage() {
   const [password, setPassword] = useState("");
@@ -399,23 +366,13 @@ export default function ContactPage() {
 
   const [error, setError] = useState("");
   const [notice, setNotice] = useState("");
-
-  // SEARCH
   const [searchBEI, setSearchBEI] = useState("");
   const [searchHMMI, setSearchHMMI] = useState("");
-
-  // FILTER
   const [filterBEI, setFilterBEI] = useState("ALL");
   const [filterHMMI, setFilterHMMI] = useState("ALL");
-
-  // MODAL
   const [modalOpen, setModalOpen] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
   const [form, setForm] = useState<ContactForm>(emptyForm);
-
-  /* =======================================================
-     LOAD CONTACTS
-  ======================================================= */
 
   async function loadContacts(currentToken: string) {
     setLoadingData(true);
@@ -446,10 +403,6 @@ export default function ContactPage() {
     }
   }
 
-  /* =======================================================
-     RESTORE SESSION
-  ======================================================= */
-
   useEffect(() => {
     const savedToken = sessionStorage.getItem("contact_token");
 
@@ -458,10 +411,6 @@ export default function ContactPage() {
       loadContacts(savedToken);
     }
   }, []);
-
-  /* =======================================================
-     LOGIN
-  ======================================================= */
 
   async function handleLogin(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -493,10 +442,6 @@ export default function ContactPage() {
     }
   }
 
-  /* =======================================================
-     LOGOUT / LOCK
-  ======================================================= */
-
   function handleLogout() {
     sessionStorage.removeItem("contact_token");
 
@@ -514,10 +459,6 @@ export default function ContactPage() {
     setError("");
   }
 
-  /* =======================================================
-     ADD CONTACT
-  ======================================================= */
-
   function openAdd(category: Category) {
     setEditingId(null);
 
@@ -529,10 +470,6 @@ export default function ContactPage() {
     setError("");
     setModalOpen(true);
   }
-
-  /* =======================================================
-     EDIT CONTACT
-  ======================================================= */
 
   function openEdit(contact: Contact) {
     setEditingId(contact.id);
@@ -548,10 +485,6 @@ export default function ContactPage() {
     setError("");
     setModalOpen(true);
   }
-
-  /* =======================================================
-     SAVE CONTACT
-  ======================================================= */
 
   async function handleSave(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -598,10 +531,6 @@ export default function ContactPage() {
     }
   }
 
-  /* =======================================================
-     DELETE CONTACT
-  ======================================================= */
-
   async function handleDelete(contact: Contact) {
     const confirmed = window.confirm(
       `Yakin ingin menghapus kontak ${contact.name}?`
@@ -631,10 +560,6 @@ export default function ContactPage() {
     }
   }
 
-  /* =======================================================
-     FILTER OPTIONS
-  ======================================================= */
-
   const beiFilterOptions = useMemo(() => {
     return Array.from(
       new Set(
@@ -656,10 +581,6 @@ export default function ContactPage() {
       )
     ).sort((a, b) => a.localeCompare(b));
   }, [contacts]);
-
-  /* =======================================================
-     BEI CONTACT FILTER
-  ======================================================= */
 
   const beiContacts = useMemo(() => {
     const keyword = searchBEI.toLowerCase().trim();
@@ -689,10 +610,6 @@ export default function ContactPage() {
     });
   }, [contacts, searchBEI, filterBEI]);
 
-  /* =======================================================
-     HMMI CONTACT FILTER
-  ======================================================= */
-
   const hmmiContacts = useMemo(() => {
     const keyword = searchHMMI.toLowerCase().trim();
 
@@ -721,10 +638,6 @@ export default function ContactPage() {
     });
   }, [contacts, searchHMMI, filterHMMI]);
 
-  /* =======================================================
-     STATISTICS
-  ======================================================= */
-
   const totalBEI = contacts.filter(
     (contact) => contact.category === "BEI"
   ).length;
@@ -733,19 +646,11 @@ export default function ContactPage() {
     (contact) => contact.category === "HMMI"
   ).length;
 
-  /* =======================================================
-     RENDER
-  ======================================================= */
-
   return (
     <main className="min-h-screen bg-[#f6f7f9] text-[#0b1220]">
 
       <Navbar />
       <PageAnimations />
-
-      {/* ===================================================
-          HERO
-      =================================================== */}
 
       <section
         data-hero
@@ -789,13 +694,8 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* ===================================================
-          CONTACT DIRECTORY
-      =================================================== */}
-
       <section className="mx-auto max-w-[1400px] px-6 py-16 lg:px-10 lg:py-20">
 
-        {/* SECTION HEADER */}
         <div className="mb-8 flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
 
           <div>
@@ -826,14 +726,12 @@ export default function ContactPage() {
 
         </div>
 
-        {/* ERROR MESSAGE */}
         {error && (
           <div className="mb-5 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
             {error}
           </div>
         )}
 
-        {/* SUCCESS MESSAGE */}
         {notice && (
           <div className="mb-5 flex items-center justify-between gap-3 rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-700">
             <span>{notice}</span>
@@ -847,10 +745,6 @@ export default function ContactPage() {
             </button>
           </div>
         )}
-
-        {/* =================================================
-            PASSWORD GATE
-        ================================================= */}
 
         {!token ? (
 
@@ -919,7 +813,6 @@ export default function ContactPage() {
 
         ) : loadingData ? (
 
-          /* LOADING */
           <div className="rounded-2xl border border-slate-200 bg-white py-20 text-center">
 
             <div className="mx-auto h-9 w-9 animate-spin rounded-full border-4 border-slate-200 border-t-blue-600" />
@@ -932,48 +825,42 @@ export default function ContactPage() {
 
         ) : (
 
-          /* =================================================
-             CONTACT DATA
-          ================================================= */
-
           <div className="space-y-8">
 
-            {/* STATISTICS */}
-            <div className="grid gap-4 sm:grid-cols-3">
+            <div className="grid grid-cols-3 gap-2 sm:gap-4">
 
-              <div className="rounded-2xl border border-slate-200 bg-white p-5">
-                <p className="text-xs font-bold tracking-wider text-slate-400">
+              <div className="rounded-2xl border border-slate-200 bg-white p-3 sm:p-5">
+                <p className="text-[9px] font-bold tracking-wider text-slate-400 sm:text-xs">
                   TOTAL CONTACTS
                 </p>
 
-                <p className="mt-2 text-3xl font-black">
+                <p className="mt-2 text-2xl font-black sm:text-3xl">
                   {contacts.length}
                 </p>
               </div>
 
-              <div className="rounded-2xl border border-blue-100 bg-blue-50 p-5">
-                <p className="text-xs font-bold tracking-wider text-blue-600">
+              <div className="rounded-2xl border border-blue-100 bg-blue-50 p-3 sm:p-5">
+                <p className="text-[9px] font-bold tracking-wider text-blue-600 sm:text-xs">
                   INTERNAL · BEI
                 </p>
 
-                <p className="mt-2 text-3xl font-black text-blue-900">
+                <p className="mt-2 text-2xl font-black text-blue-900 sm:text-3xl">
                   {totalBEI}
                 </p>
               </div>
 
-              <div className="rounded-2xl border border-emerald-100 bg-emerald-50 p-5">
-                <p className="text-xs font-bold tracking-wider text-emerald-600">
+              <div className="rounded-2xl border border-emerald-100 bg-emerald-50 p-3 sm:p-5">
+                <p className="text-[9px] font-bold tracking-wider text-emerald-600 sm:text-xs">
                   CUSTOMER · HMMI
                 </p>
 
-                <p className="mt-2 text-3xl font-black text-emerald-900">
+                <p className="mt-2 text-2xl font-black text-emerald-900 sm:text-3xl">
                   {totalHMMI}
                 </p>
               </div>
 
             </div>
 
-            {/* BEI TABLE */}
             <ContactTable
               title="Internal Contact"
               subtitle="Bumjin Electronics Indonesia / BEI"
@@ -990,7 +877,6 @@ export default function ContactPage() {
               onDelete={handleDelete}
             />
 
-            {/* HMMI TABLE */}
             <ContactTable
               title="Customer Contact"
               subtitle="Hyundai Motor Manufacturing Indonesia / HMMI"
@@ -1007,7 +893,6 @@ export default function ContactPage() {
               onDelete={handleDelete}
             />
 
-            {/* REFRESH */}
             <div className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-slate-200 bg-white px-5 py-4">
 
               <p className="text-xs text-slate-500">
@@ -1030,17 +915,12 @@ export default function ContactPage() {
 
       </section>
 
-      {/* ===================================================
-          ADD / EDIT MODAL
-      =================================================== */}
-
       {modalOpen && token && (
 
         <div className="fixed inset-0 z-[100] flex items-center justify-center overflow-y-auto bg-slate-950/60 p-4 backdrop-blur-sm">
 
           <div className="my-auto w-full max-w-xl overflow-hidden rounded-2xl bg-white shadow-2xl">
 
-            {/* MODAL HEADER */}
             <div className="flex items-center justify-between border-b border-slate-100 px-6 py-5">
 
               <div>
@@ -1063,10 +943,8 @@ export default function ContactPage() {
 
             </div>
 
-            {/* MODAL FORM */}
             <form onSubmit={handleSave} className="space-y-5 p-6">
 
-              {/* NAME */}
               <div>
                 <label className="mb-2 block text-sm font-bold">
                   Nama *
@@ -1083,7 +961,6 @@ export default function ContactPage() {
                 />
               </div>
 
-              {/* PHONE */}
               <div>
                 <label className="mb-2 block text-sm font-bold">
                   Nomor Telepon *
@@ -1101,7 +978,6 @@ export default function ContactPage() {
                 />
               </div>
 
-              {/* EMAIL */}
               <div>
                 <label className="mb-2 block text-sm font-bold">
                   Email
@@ -1118,7 +994,6 @@ export default function ContactPage() {
                 />
               </div>
 
-              {/* ORGANIZATION */}
               <div>
                 <label className="mb-2 block text-sm font-bold">
                   Organisasi / Jabatan
@@ -1137,7 +1012,6 @@ export default function ContactPage() {
                 />
               </div>
 
-              {/* CATEGORY */}
               <div>
                 <label className="mb-2 block text-sm font-bold">
                   Kategori *
@@ -1163,7 +1037,6 @@ export default function ContactPage() {
                 </select>
               </div>
 
-              {/* BUTTONS */}
               <div className="flex flex-col-reverse gap-3 pt-2 sm:flex-row">
 
                 <button
@@ -1194,42 +1067,37 @@ export default function ContactPage() {
         </div>
       )}
 
-      {/* ===================================================
-          EMAIL / PHONE
-      =================================================== */}
-
       <section className="mx-auto max-w-[1400px] px-6 pb-16 lg:px-10">
 
-        <div data-card-group className="grid gap-5 lg:grid-cols-2">
+        <div data-card-group className="grid grid-cols-2 gap-3 sm:gap-5">
 
-          {/* EMAIL */}
           <div
             data-card
-            className="group relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-7 transition duration-300 hover:-translate-y-1 hover:border-slate-300 hover:shadow-[0_25px_60px_-25px_rgba(15,23,42,0.3)]"
+            className="group relative min-w-0 overflow-hidden rounded-2xl border border-slate-200 bg-white p-3 transition duration-300 hover:-translate-y-1 hover:border-slate-300 hover:shadow-[0_25px_60px_-25px_rgba(15,23,42,0.3)] sm:p-7"
           >
 
             <div className="absolute left-0 top-0 h-1 w-full bg-blue-600" />
 
-            <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-blue-50 text-2xl">
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-50 text-xl sm:h-14 sm:w-14 sm:text-2xl">
               ✉
             </div>
 
-            <p className="mt-7 text-xs font-bold tracking-[0.2em] text-blue-600">
+            <p className="mt-4 text-[9px] font-bold tracking-[0.12em] text-blue-600 sm:mt-7 sm:text-xs sm:tracking-[0.2em]">
               EMAIL
             </p>
 
-            <h2 className="mt-3 text-2xl font-black tracking-tight">
+            <h2 className="mt-2 text-base font-black tracking-tight sm:mt-3 sm:text-2xl">
               Email Us
             </h2>
 
-            <p className="mt-3 text-sm leading-6 text-slate-500">
+            <p className="mt-2 text-xs leading-5 text-slate-500 sm:mt-3 sm:text-sm sm:leading-6">
               Send us an email for questions, information, or
               assistance related to the training program.
             </p>
 
             <a
               href="mailto:qc_05@bumjin.co.id"
-              className="mt-6 inline-flex items-center gap-2 break-all text-base font-bold text-[#0b1220] transition hover:text-blue-600"
+              className="mt-4 inline-flex max-w-full items-center gap-1 break-all text-xs font-bold text-[#0b1220] transition hover:text-blue-600 sm:mt-6 sm:gap-2 sm:text-base"
             >
               qc_05@bumjin.co.id
               <span>↗</span>
@@ -1237,34 +1105,33 @@ export default function ContactPage() {
 
           </div>
 
-          {/* PHONE / WHATSAPP */}
           <div
             data-card
-            className="group relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-7 transition duration-300 hover:-translate-y-1 hover:border-slate-300 hover:shadow-[0_25px_60px_-25px_rgba(15,23,42,0.3)]"
+            className="group relative min-w-0 overflow-hidden rounded-2xl border border-slate-200 bg-white p-3 transition duration-300 hover:-translate-y-1 hover:border-slate-300 hover:shadow-[0_25px_60px_-25px_rgba(15,23,42,0.3)] sm:p-7"
           >
 
             <div className="absolute left-0 top-0 h-1 w-full bg-[#0b1220]" />
 
-            <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-slate-100 text-2xl">
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-slate-100 text-xl sm:h-14 sm:w-14 sm:text-2xl">
               ☎
             </div>
 
-            <p className="mt-7 text-xs font-bold tracking-[0.2em] text-slate-600">
+            <p className="mt-4 text-[9px] font-bold tracking-[0.12em] text-slate-600 sm:mt-7 sm:text-xs sm:tracking-[0.2em]">
               PHONE / WHATSAPP
             </p>
 
-            <h2 className="mt-3 text-2xl font-black tracking-tight">
+            <h2 className="mt-2 text-base font-black tracking-tight sm:mt-3 sm:text-2xl">
               Contact Us
             </h2>
 
-            <p className="mt-3 text-sm leading-6 text-slate-500">
+            <p className="mt-2 text-xs leading-5 text-slate-500 sm:mt-3 sm:text-sm sm:leading-6">
               Contact the Quality Training Center directly for
               further assistance.
             </p>
 
             <a
               href="tel:0895385191979"
-              className="mt-6 inline-flex items-center gap-2 text-base font-bold text-[#0b1220] transition hover:text-blue-600"
+              className="mt-4 inline-flex items-center gap-1 text-xs font-bold text-[#0b1220] transition hover:text-blue-600 sm:mt-6 sm:gap-2 sm:text-base"
             >
               0895 3851 91979
               <span>↗</span>
@@ -1274,10 +1141,6 @@ export default function ContactPage() {
 
         </div>
       </section>
-
-      {/* ===================================================
-          CTA
-      =================================================== */}
 
       <section className="mx-auto max-w-[1400px] px-6 pb-16 lg:px-10 lg:pb-20">
 
@@ -1327,10 +1190,6 @@ export default function ContactPage() {
           </div>
         </div>
       </section>
-
-      {/* ===================================================
-          FOOTER
-      =================================================== */}
 
       <footer className="border-t border-slate-200 bg-[#f6f7f9]">
 

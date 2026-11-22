@@ -605,11 +605,11 @@ export default function ResultPage() {
 
           {/* FILTER INPUTS */}
 
-          <div className="grid gap-4 md:grid-cols-3">
+          <div className="grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-4">
 
             {/* SEARCH */}
 
-            <div>
+            <div className="col-span-2 md:col-span-1">
               <label
                 htmlFor="training-search"
                 className="mb-2 block text-xs font-bold text-slate-600"

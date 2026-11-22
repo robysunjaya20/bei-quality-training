@@ -1,4 +1,3 @@
-
 "use client";
 
 import Link from "next/link";
@@ -82,8 +81,12 @@ export default function Navbar() {
             onClick={closeMenus}
             className="flex shrink-0 items-center gap-3"
           >
-            <div className="flex h-11 w-11 items-center justify-center rounded-[11px] bg-[#0b1220] text-[14px] font-black tracking-[-0.04em] text-white">
-              BQ
+            <div className="relative h-11 w-11 shrink-0 overflow-hidden rounded-[11px]">
+              <img
+                src="/icon.png"
+                alt="BEI Quality logo"
+                className="h-full w-full object-contain"
+              />
             </div>
 
             <div className="leading-none">
