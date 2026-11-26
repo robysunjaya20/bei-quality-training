@@ -1,7 +1,9 @@
+
 "use client";
 
 import { ChangeEvent, DragEvent, useRef, useState } from "react";
 import ExcelJS from "exceljs";
+
 import {
     ArrowDownToLine,
     CheckCircle2,
@@ -10,6 +12,7 @@ import {
     UploadCloud,
     X,
 } from "lucide-react";
+
 import Navbar from "@/components/Navbar";
 
 type OutputRow = {
@@ -20,9 +23,11 @@ type OutputRow = {
     incomingQty: number | string;
     sampleQty: number | string;
     ngQty: number | string;
+    result: string;
+    ppm: string;
     defectName: string;
-    inspectorName: string;
     customerName: string;
+    inspectorName: string;
 };
 
 const OUTPUT_HEADERS = [
@@ -33,9 +38,11 @@ const OUTPUT_HEADERS = [
     "Incoming/Inspection Qty",
     "Sample Qty",
     "NG Qty",
+    "Result",
+    "PPM",
     "Defect Name",
-    "Inspector Name",
     "Customer Name",
+    "Inspector Name",
 ];
 
 const HEADER_ALIASES: Record<keyof OutputRow, string[]> = {
@@ -50,9 +57,11 @@ const HEADER_ALIASES: Record<keyof OutputRow, string[]> = {
     ],
     sampleQty: ["sample qty", "sampling qty"],
     ngQty: ["ng qty", "reject qty"],
+    result: ["result"],
+    ppm: ["ppm"],
     defectName: ["defect name", "defect"],
-    inspectorName: ["inspector name", "inspector"],
     customerName: ["customer name", "customer"],
+    inspectorName: ["inspector name", "inspector"],
 };
 
 const REQUIRED_KEYS: (keyof OutputRow)[] = [
@@ -67,6 +76,35 @@ const REQUIRED_KEYS: (keyof OutputRow)[] = [
     "inspectorName",
     "customerName",
 ];
+
+// Mapping nama customer.
+const CUSTOMER_NAME_MAP: Record<string, string> = {
+    "PT.HYUNDAI MOTOR MANUFACTURING INDONESIA": "HMMI",
+    "PT.APM HYUNDAI TRANSYS INDONESIA": "AHTI",
+    "PT.ROBERT BOSCH AUTOMOTIVE": "BOSCH",
+    "PT.APM ARMADA AUTOPARTS": "AAA",
+    "PT.DAECHANG AUTOMOTIVE INDONESIA": "DAECHANG",
+    "PT.SUMMIT SEOYON AUTOMOTIVE INDONESIA": "SSA",
+};
+
+// Customer yang tidak ingin dimasukkan ke hasil konversi.
+const EXCLUDED_CUSTOMERS = [
+    "SAMSUNG ELECTRONICS HCMC CE COMPLEX CO., LTD.",
+    "MEXPIA S.A DE C.V. BLVD.INSURGENTES 20252.",
+    "SAMSUNG ELECTRONICS HCMC CE COMPLEX CO., LTD",
+    "SAMSUNG ELECTRONICS EGYPT S.A.E",
+    "SAMSUNG ELETRONICA DA AMAZONIA LTDA"
+];
+
+// Prioritas urutan customer pada tanggal yang sama.
+const CUSTOMER_PRIORITY: Record<string, number> = {
+    AHTI: 1,
+    DAECHANG: 2,
+    AAA: 3,
+    SSA: 4,
+    BOSCH: 5,
+    HMMI: 6,
+};
 
 function normalizeHeader(value: unknown): string {
     return String(value ?? "")
@@ -91,9 +129,7 @@ function normalizeQty(value: unknown): number | string {
     }
 
     if (typeof value === "object" && value !== null && "result" in value) {
-        return normalizeQty(
-            (value as { result: unknown }).result
-        );
+        return normalizeQty((value as { result: unknown }).result);
     }
 
     let raw = String(value).trim();
@@ -110,7 +146,6 @@ function normalizeQty(value: unknown): number | string {
     } else if (raw.includes(",")) {
         raw = raw.replace(",", ".");
     } else if (/^-?\d{1,3}(\.\d{3})+$/.test(raw)) {
-        // Contoh: 150.000 atau 1.250.000.
         raw = raw.replace(/\./g, "");
     }
 
@@ -163,6 +198,35 @@ function cellToText(value: unknown): string {
     return String(value).trim();
 }
 
+// Normalisasi nama customer agar konsisten.
+function normalizeCustomerText(value: unknown): string {
+    return cellToText(value)
+        .replace(/\s+/g, " ")
+        .trim()
+        .toUpperCase()
+        .replace(/^PT\.\s*/, "PT.");
+}
+
+// Menghapus customer tertentu dari data.
+function isExcludedCustomer(value: unknown): boolean {
+    const customer = normalizeCustomerText(value);
+
+    return EXCLUDED_CUSTOMERS.some(
+        (excluded) => customer === normalizeCustomerText(excluded)
+    );
+}
+
+// Mengubah nama customer menjadi singkatan.
+function normalizeCustomerName(value: unknown): string {
+    const customerName = cellToText(value)
+        .replace(/\s+/g, " ")
+        .trim();
+
+    const normalized = normalizeCustomerText(customerName);
+
+    return CUSTOMER_NAME_MAP[normalized] ?? customerName;
+}
+
 // Mengosongkan Defect Name jika nilainya NO DEFECT atau NO DEFFECT.
 function normalizeDefectName(value: unknown): string {
     const text = cellToText(value).trim();
@@ -174,7 +238,7 @@ function normalizeDefectName(value: unknown): string {
     return text;
 }
 
-// Menghilangkan desimal nol di belakang, misalnya 0.000 menjadi 0.
+// Menghilangkan desimal nol di belakang.
 function normalizeNgQty(value: unknown): number | string {
     if (value === null || value === undefined || value === "") {
         return 0;
@@ -196,28 +260,7 @@ function normalizeNgQty(value: unknown): number | string {
         return 0;
     }
 
-    // Hanya menghapus bagian desimal jika seluruh digit setelah titik adalah nol.
-    return text.replace(/(\.0+)$/, "");
-}
-
-const CUSTOMER_NAME_MAP: Record<string, string> = {
-    "PT.HYUNDAI MOTOR MANUFACTURING INDONESIA": "HMMI",
-    "PT.APM HYUNDAI TRANSYS INDONESIA": "AHTI",
-    "PT.ROBERT BOSCH AUTOMOTIVE": "BOSCH",
-    "PT.APM ARMADA AUTOPARTS": "AAA",
-    "PT.DAECHANG AUTOMOTIVE INDONESIA": "DAECHANG",
-};
-
-function normalizeCustomerName(value: unknown): string {
-    const customerName = cellToText(value)
-        .replace(/\s+/g, " ")
-        .trim();
-
-    const normalized = customerName
-        .toUpperCase()
-        .replace(/^PT\.\s*/, "PT.");
-
-    return CUSTOMER_NAME_MAP[normalized] ?? customerName;
+    return text.replace(/\.0+$/, "");
 }
 
 function findHeaderRow(sheet: ExcelJS.Worksheet) {
@@ -272,7 +315,6 @@ function formatDate(value: unknown): string {
     }
 
     if (typeof value === "number") {
-        // Konversi tanggal serial Excel.
         const date = new Date(
             Date.UTC(1899, 11, 30) + value * 86400000
         );
@@ -321,7 +363,6 @@ function dateToTimestamp(value: string): number {
     const timestamp = new Date(year, month - 1, day).getTime();
     const check = new Date(timestamp);
 
-    // Tolak tanggal yang tidak valid, misalnya 31/02/2026.
     if (
         Number.isNaN(timestamp) ||
         check.getFullYear() !== year ||
@@ -366,9 +407,11 @@ async function parseWorkbook(file: File): Promise<OutputRow[]> {
             incomingQty: "Incoming/Inspection Qty",
             sampleQty: "Sample Qty",
             ngQty: "NG Qty",
+            result: "Result",
+            ppm: "PPM",
             defectName: "Defect Name",
-            inspectorName: "Inspector Name",
             customerName: "Customer Name",
+            inspectorName: "Inspector Name",
         };
 
         throw new Error(
@@ -390,12 +433,20 @@ async function parseWorkbook(file: File): Promise<OutputRow[]> {
         const materialCode = cellToText(
             getCell(row, headerMap.materialCode)
         );
+
         const materialDesc = cellToText(
             getCell(row, headerMap.materialDesc)
         );
 
+        const rawCustomerName = getCell(row, headerMap.customerName);
+
         // Abaikan baris yang tidak memiliki Material Code dan Material Desc.
         if (!materialCode && !materialDesc) {
+            continue;
+        }
+
+        // Hapus seluruh baris milik customer yang dikecualikan.
+        if (isExcludedCustomer(rawCustomerName)) {
             continue;
         }
 
@@ -403,42 +454,47 @@ async function parseWorkbook(file: File): Promise<OutputRow[]> {
             date: formatDate(getCell(row, headerMap.date)),
             materialDesc,
             materialCode,
+
             materialModel: cellToText(
                 getCell(row, headerMap.materialModel)
             ),
+
             incomingQty: normalizeQty(
                 getCell(row, headerMap.incomingQty)
             ),
+
             sampleQty: normalizeQty(
                 getCell(row, headerMap.sampleQty)
             ),
+
             ngQty: normalizeNgQty(
                 getCell(row, headerMap.ngQty)
             ),
+
+            // Result dan PPM selalu kosong.
+            result: "",
+            ppm: "",
+
             defectName: normalizeDefectName(
                 getCell(row, headerMap.defectName)
             ),
+
+            customerName: normalizeCustomerName(rawCustomerName),
+
             inspectorName: cellToText(
                 getCell(row, headerMap.inspectorName)
-            ),
-            customerName: normalizeCustomerName(
-                getCell(row, headerMap.customerName)
             ),
         });
     }
 
     if (!rows.length) {
-        throw new Error("Tidak ada baris data yang bisa dikonversi.");
+        throw new Error(
+            "Tidak ada baris data yang bisa dikonversi setelah proses filter customer."
+        );
     }
 
-    const customerPriority: Record<string, number> = {
-        AHTI: 1,
-        DAECHANG: 2,
-        AAA: 3,
-        BOSCH: 4,
-        HMMI: 5,
-    };
-
+    // Sorting tanggal terlama ke terbaru.
+    // Jika tanggal sama, gunakan prioritas customer.
     rows.sort((a, b) => {
         const dateDifference =
             dateToTimestamp(a.date) - dateToTimestamp(b.date);
@@ -448,8 +504,8 @@ async function parseWorkbook(file: File): Promise<OutputRow[]> {
         }
 
         return (
-            (customerPriority[a.customerName] ?? 999) -
-            (customerPriority[b.customerName] ?? 999)
+            (CUSTOMER_PRIORITY[a.customerName] ?? 999) -
+            (CUSTOMER_PRIORITY[b.customerName] ?? 999)
         );
     });
 
@@ -502,6 +558,7 @@ export default function Home() {
                     ? err.message
                     : "Terjadi kesalahan saat membaca file."
             );
+
             setFile(null);
         } finally {
             setBusy(false);
@@ -549,16 +606,18 @@ export default function Home() {
             { header: OUTPUT_HEADERS[4], key: "incomingQty", width: 24 },
             { header: OUTPUT_HEADERS[5], key: "sampleQty", width: 15 },
             { header: OUTPUT_HEADERS[6], key: "ngQty", width: 12 },
-            { header: OUTPUT_HEADERS[7], key: "defectName", width: 20 },
-            { header: OUTPUT_HEADERS[8], key: "inspectorName", width: 18 },
-            { header: OUTPUT_HEADERS[9], key: "customerName", width: 42 },
+            { header: OUTPUT_HEADERS[7], key: "result", width: 15 },
+            { header: OUTPUT_HEADERS[8], key: "ppm", width: 15 },
+            { header: OUTPUT_HEADERS[9], key: "defectName", width: 20 },
+            { header: OUTPUT_HEADERS[10], key: "customerName", width: 25 },
+            { header: OUTPUT_HEADERS[11], key: "inspectorName", width: 20 },
         ];
 
-        // Data sudah diurutkan dari tanggal terlama ke terbaru.
         rows.forEach((item) => {
             worksheet.addRow(item);
         });
 
+        // Styling header.
         const headerRow = worksheet.getRow(1);
         headerRow.height = 25;
 
@@ -588,9 +647,11 @@ export default function Home() {
             };
         });
 
+        // Freeze header dan aktifkan filter sampai kolom L.
         worksheet.views = [{ state: "frozen", ySplit: 1 }];
-        worksheet.autoFilter = { from: "A1", to: "J1" };
+        worksheet.autoFilter = { from: "A1", to: "L1" };
 
+        // Styling baris data.
         worksheet.eachRow((row, rowNumber) => {
             if (rowNumber === 1) {
                 return;
@@ -608,6 +669,7 @@ export default function Home() {
             });
         });
 
+        // Format angka untuk Incoming Qty dan Sample Qty.
         ["E", "F"].forEach((column) => {
             worksheet.getColumn(column).numFmt = "#,##0.######";
         });
@@ -628,7 +690,6 @@ export default function Home() {
 
         anchor.click();
 
-        // Beri waktu browser memulai download sebelum URL dilepas.
         window.setTimeout(() => URL.revokeObjectURL(url), 1000);
     }
 
@@ -648,7 +709,9 @@ export default function Home() {
 
             <main className="page-shell">
                 <section className="hero">
-                    <div className="eyebrow">DATA TRANSFORMATION TOOLS</div>
+                    <div className="eyebrow">
+                        DATA TRANSFORMATION TOOLS
+                    </div>
 
                     <h1>
                         Rapikan data ERP
@@ -784,8 +847,8 @@ export default function Home() {
                                 <p>
                                     Menampilkan {previewRows.length} dari{" "}
                                     {rows.length.toLocaleString("id-ID")} baris
-                                    pertama. Urutan tanggal: paling lama ke
-                                    paling baru; customer mengikuti prioritas.
+                                    data. Urutan tanggal: paling lama ke paling
+                                    baru; customer mengikuti prioritas.
                                 </p>
                             </div>
 
@@ -811,16 +874,21 @@ export default function Home() {
                                             <td>{row.materialDesc}</td>
                                             <td>{row.materialCode}</td>
                                             <td>{row.materialModel}</td>
+
                                             <td className="numeric">
                                                 {displayValue(row.incomingQty)}
                                             </td>
+
                                             <td className="numeric">
                                                 {displayValue(row.sampleQty)}
                                             </td>
+
                                             <td>{row.ngQty}</td>
+                                            <td>{row.result}</td>
+                                            <td>{row.ppm}</td>
                                             <td>{row.defectName}</td>
-                                            <td>{row.inspectorName}</td>
                                             <td>{row.customerName}</td>
+                                            <td>{row.inspectorName}</td>
                                         </tr>
                                     ))}
                                 </tbody>
@@ -830,9 +898,10 @@ export default function Home() {
                         <div className="download-row">
                             <div>
                                 <strong>File siap di-download</strong>
+
                                 <span>
                                     {rows.length.toLocaleString("id-ID")} baris
-                                    · 10 kolom · 1 worksheet
+                                    · 12 kolom · 1 worksheet
                                 </span>
                             </div>
 
