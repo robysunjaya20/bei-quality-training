@@ -1,6 +1,6 @@
 
 import ExcelJS from 'exceljs';
-import type { ReportPayload, Model } from './types';
+import type { ReportPayload, Model } from './rechecking-types';
 import { MODEL_PREFIX } from './types';
 
 const TEMPLATE = '/rechecking-fg-template.xlsx';

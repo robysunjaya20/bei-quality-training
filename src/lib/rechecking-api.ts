@@ -1,4 +1,4 @@
-import type { InspectionRecord } from './types';
+import type { InspectionRecord } from "./rechecking-types";
 
 export function configured(): boolean {
   return Boolean(
