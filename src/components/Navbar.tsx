@@ -1,3 +1,4 @@
+
 "use client";
 
 import Link from "next/link";
@@ -5,14 +6,8 @@ import { usePathname } from "next/navigation";
 import { useState } from "react";
 
 const navItems = [
-  {
-    name: "Home",
-    href: "/",
-  },
-  {
-    name: "Modules",
-    href: "/modules",
-  },
+  { name: "Home", href: "/" },
+  { name: "Modules", href: "/modules" },
 ];
 
 const assessmentItems = [
@@ -33,29 +28,48 @@ const assessmentItems = [
   },
 ];
 
+const toolItems = [
+  {
+    name: "ERP To Gsheet",
+    href: "/erp-to-gsheet",
+    description: "Transfer dan olah data ERP ke Google Sheets.",
+  },
+  {
+    name: "Report PDI",
+    href: "/report-pdi",
+    description: "Generate dan kelola laporan inspeksi PDI.",
+  },
+  {
+    name: "Report Rechecking",
+    href: "/report-rechecking",
+    description: "Generate dan kelola laporan Rechecking.",
+  },
+];
+
 export default function Navbar() {
   const pathname = usePathname();
 
   const [isOpen, setIsOpen] = useState(false);
   const [assessmentOpen, setAssessmentOpen] = useState(false);
+  const [toolsOpen, setToolsOpen] = useState(false);
 
   const isHomePage = pathname === "/";
 
-  const isAssessmentActive = assessmentItems.some(
-    (item) => pathname === item.href || pathname.startsWith(`${item.href}/`)
-  );
-
   const isActive = (href: string) => {
-    if (href === "/") {
-      return pathname === "/";
-    }
-
+    if (href === "/") return pathname === "/";
     return pathname === href || pathname.startsWith(`${href}/`);
   };
+
+  const isAssessmentActive = assessmentItems.some((item) =>
+    isActive(item.href)
+  );
+
+  const isToolsActive = toolItems.some((item) => isActive(item.href));
 
   const closeMenus = () => {
     setIsOpen(false);
     setAssessmentOpen(false);
+    setToolsOpen(false);
   };
 
   const desktopLinkClass = (href: string) =>
@@ -68,13 +82,43 @@ export default function Navbar() {
       ? "rounded-[9px] bg-slate-100 px-4 py-3 text-[14px] font-semibold text-[#0b1220]"
       : "rounded-[9px] px-4 py-3 text-[14px] font-semibold text-slate-600 transition-colors hover:bg-slate-50";
 
+  const dropdownButtonClass = (active: boolean) =>
+    `flex items-center gap-2 rounded-[10px] px-4 py-2.5 text-[14px] font-semibold transition-colors ${
+      active
+        ? "bg-slate-100 text-[#0b1220]"
+        : "text-slate-500 hover:bg-slate-50 hover:text-[#0b1220]"
+    }`;
+
+  const mobileDropdownClass = (active: boolean) =>
+    `flex w-full items-center justify-between rounded-[9px] px-4 py-3 text-[14px] font-semibold transition-colors ${
+      active
+        ? "bg-slate-100 text-[#0b1220]"
+        : "text-slate-600 hover:bg-slate-50"
+    }`;
+
+  const Arrow = ({ open }: { open: boolean }) => (
+    <svg
+      className={`h-4 w-4 transition-transform duration-200 ${
+        open ? "rotate-180" : ""
+      }`}
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+      strokeWidth={2}
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="m6 9 6 6 6-6"
+      />
+    </svg>
+  );
+
   return (
     <header className="sticky top-0 z-50 border-b border-slate-200 bg-white">
       <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
-
-        {/* NAVBAR DESKTOP */}
+        {/* DESKTOP HEADER */}
         <div className="flex h-[76px] items-center justify-between">
-
           {/* LOGO */}
           <Link
             href="/"
@@ -93,7 +137,6 @@ export default function Navbar() {
               <div className="text-[15px] font-black tracking-[-0.02em] text-[#0b1220]">
                 BEI QUALITY
               </div>
-
               <div className="mt-[5px] text-[9px] font-medium tracking-[0.2em] text-slate-400">
                 TRAINING CENTER
               </div>
@@ -102,8 +145,6 @@ export default function Navbar() {
 
           {/* DESKTOP NAVIGATION */}
           <nav className="hidden items-center gap-0.5 md:flex">
-
-            {/* HOME & MODULES */}
             {navItems.map((item) => (
               <Link
                 key={item.href}
@@ -115,76 +156,87 @@ export default function Navbar() {
               </Link>
             ))}
 
+            {/* TOOLS DROPDOWN */}
+            <div className="relative">
+              <button
+                type="button"
+                aria-expanded={toolsOpen}
+                onClick={() => {
+                  setToolsOpen((prev) => !prev);
+                  setAssessmentOpen(false);
+                }}
+                className={dropdownButtonClass(isToolsActive || toolsOpen)}
+              >
+                Tools
+                <Arrow open={toolsOpen} />
+              </button>
+
+              {toolsOpen && (
+                <div className="absolute left-0 top-full z-50 mt-2 w-[290px] overflow-hidden rounded-xl border border-slate-200 bg-white p-2 shadow-xl">
+                  {toolItems.map((item) => (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      onClick={closeMenus}
+                      className={`block rounded-lg px-4 py-3 transition-colors ${
+                        isActive(item.href)
+                          ? "bg-blue-50 text-blue-600"
+                          : "text-slate-700 hover:bg-slate-50"
+                      }`}
+                    >
+                      <div className="text-[14px] font-bold">
+                        {item.name}
+                      </div>
+                      <div className="mt-1 text-[11px] text-slate-400">
+                        {item.description}
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+
             {/* ASSESSMENT DROPDOWN */}
             <div className="relative">
               <button
                 type="button"
                 aria-expanded={assessmentOpen}
-                onClick={() => setAssessmentOpen((prev) => !prev)}
-                className={
+                onClick={() => {
+                  setAssessmentOpen((prev) => !prev);
+                  setToolsOpen(false);
+                }}
+                className={dropdownButtonClass(
                   isAssessmentActive || assessmentOpen
-                    ? "flex items-center gap-2 rounded-[10px] bg-slate-100 px-4 py-2.5 text-[14px] font-semibold text-[#0b1220]"
-                    : "flex items-center gap-2 rounded-[10px] px-4 py-2.5 text-[14px] font-semibold text-slate-500 transition-colors hover:bg-slate-50 hover:text-[#0b1220]"
-                }
+                )}
               >
                 Assessment
-
-                <svg
-                  className={`h-4 w-4 transition-transform duration-200 ${
-                    assessmentOpen ? "rotate-180" : ""
-                  }`}
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth={2}
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="m6 9 6 6 6-6"
-                  />
-                </svg>
+                <Arrow open={assessmentOpen} />
               </button>
 
-              {/* ASSESSMENT MENU */}
               {assessmentOpen && (
                 <div className="absolute left-0 top-full z-50 mt-2 w-[270px] overflow-hidden rounded-xl border border-slate-200 bg-white p-2 shadow-xl">
-                  {assessmentItems.map((item) => {
-                    const active = isActive(item.href);
-
-                    return (
-                      <Link
-                        key={item.href}
-                        href={item.href}
-                        onClick={closeMenus}
-                        className={`block rounded-lg px-4 py-3 transition-colors ${
-                          active
-                            ? "bg-blue-50 text-blue-600"
-                            : "text-slate-700 hover:bg-slate-50"
-                        }`}
-                      >
-                        <div className="text-[14px] font-bold">
-                          {item.name}
-                        </div>
-
-                        <div className="mt-1 text-[11px] text-slate-400">
-                          {item.description}
-                        </div>
-                      </Link>
-                    );
-                  })}
+                  {assessmentItems.map((item) => (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      onClick={closeMenus}
+                      className={`block rounded-lg px-4 py-3 transition-colors ${
+                        isActive(item.href)
+                          ? "bg-blue-50 text-blue-600"
+                          : "text-slate-700 hover:bg-slate-50"
+                      }`}
+                    >
+                      <div className="text-[14px] font-bold">
+                        {item.name}
+                      </div>
+                      <div className="mt-1 text-[11px] text-slate-400">
+                        {item.description}
+                      </div>
+                    </Link>
+                  ))}
                 </div>
               )}
             </div>
-
-            {/* ERP TO GSHEET */}
-            <Link
-              href="/erp-to-gsheet"
-              onClick={closeMenus}
-              className={desktopLinkClass("/erp-to-gsheet")}
-            >
-              ERP To Gsheet
-            </Link>
 
             {/* CONTACT */}
             <Link
@@ -217,21 +269,17 @@ export default function Navbar() {
           {/* MOBILE MENU BUTTON */}
           <button
             type="button"
-            aria-label={
-              isOpen
-                ? "Close navigation menu"
-                : "Open navigation menu"
-            }
+            aria-label={isOpen ? "Close navigation menu" : "Open navigation menu"}
             aria-expanded={isOpen}
             onClick={() => {
               setIsOpen((prev) => !prev);
               setAssessmentOpen(false);
+              setToolsOpen(false);
             }}
             className="flex h-9 w-9 items-center justify-center rounded-[9px] border border-slate-200 bg-white text-[#0b1220] md:hidden"
           >
             {isOpen ? (
               <svg
-                xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
                 strokeWidth={2}
@@ -246,7 +294,6 @@ export default function Navbar() {
               </svg>
             ) : (
               <svg
-                xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
                 strokeWidth={2}
@@ -267,8 +314,6 @@ export default function Navbar() {
         {isOpen && (
           <div className="border-t border-slate-200 py-3 md:hidden">
             <nav className="flex flex-col gap-0.5">
-
-              {/* HOME & MODULES */}
               {navItems.map((item) => (
                 <Link
                   key={item.href}
@@ -280,75 +325,85 @@ export default function Navbar() {
                 </Link>
               ))}
 
+              {/* MOBILE TOOLS */}
+              <div>
+                <button
+                  type="button"
+                  aria-expanded={toolsOpen}
+                  onClick={() => {
+                    setToolsOpen((prev) => !prev);
+                    setAssessmentOpen(false);
+                  }}
+                  className={mobileDropdownClass(isToolsActive || toolsOpen)}
+                >
+                  Tools
+                  <Arrow open={toolsOpen} />
+                </button>
+
+                {toolsOpen && (
+                  <div className="ml-4 mt-1 flex flex-col gap-1 border-l-2 border-slate-200 pl-3">
+                    {toolItems.map((item) => (
+                      <Link
+                        key={item.href}
+                        href={item.href}
+                        onClick={closeMenus}
+                        className={`rounded-[9px] px-4 py-3 text-[13px] font-semibold transition-colors ${
+                          isActive(item.href)
+                            ? "bg-blue-50 text-blue-600"
+                            : "text-slate-500 hover:bg-slate-50 hover:text-[#0b1220]"
+                        }`}
+                      >
+                        <div>{item.name}</div>
+                        <div className="mt-1 text-[11px] font-normal text-slate-400">
+                          {item.description}
+                        </div>
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
+
               {/* MOBILE ASSESSMENT */}
               <div>
                 <button
                   type="button"
                   aria-expanded={assessmentOpen}
-                  onClick={() => setAssessmentOpen((prev) => !prev)}
-                  className={`flex w-full items-center justify-between rounded-[9px] px-4 py-3 text-[14px] font-semibold transition-colors ${
+                  onClick={() => {
+                    setAssessmentOpen((prev) => !prev);
+                    setToolsOpen(false);
+                  }}
+                  className={mobileDropdownClass(
                     isAssessmentActive || assessmentOpen
-                      ? "bg-slate-100 text-[#0b1220]"
-                      : "text-slate-600 hover:bg-slate-50"
-                  }`}
+                  )}
                 >
                   Assessment
-
-                  <svg
-                    className={`h-4 w-4 transition-transform duration-200 ${
-                      assessmentOpen ? "rotate-180" : ""
-                    }`}
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    strokeWidth={2}
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="m6 9 6 6 6-6"
-                    />
-                  </svg>
+                  <Arrow open={assessmentOpen} />
                 </button>
 
-                {/* MOBILE ASSESSMENT MENU */}
                 {assessmentOpen && (
                   <div className="ml-4 mt-1 flex flex-col gap-1 border-l-2 border-slate-200 pl-3">
-                    {assessmentItems.map((item) => {
-                      const active = isActive(item.href);
-
-                      return (
-                        <Link
-                          key={item.href}
-                          href={item.href}
-                          onClick={closeMenus}
-                          className={`rounded-[9px] px-4 py-3 text-[13px] font-semibold transition-colors ${
-                            active
-                              ? "bg-blue-50 text-blue-600"
-                              : "text-slate-500 hover:bg-slate-50 hover:text-[#0b1220]"
-                          }`}
-                        >
-                          <div>{item.name}</div>
-                          <div className="mt-1 text-[11px] font-normal text-slate-400">
-                            {item.description}
-                          </div>
-                        </Link>
-                      );
-                    })}
+                    {assessmentItems.map((item) => (
+                      <Link
+                        key={item.href}
+                        href={item.href}
+                        onClick={closeMenus}
+                        className={`rounded-[9px] px-4 py-3 text-[13px] font-semibold transition-colors ${
+                          isActive(item.href)
+                            ? "bg-blue-50 text-blue-600"
+                            : "text-slate-500 hover:bg-slate-50 hover:text-[#0b1220]"
+                        }`}
+                      >
+                        <div>{item.name}</div>
+                        <div className="mt-1 text-[11px] font-normal text-slate-400">
+                          {item.description}
+                        </div>
+                      </Link>
+                    ))}
                   </div>
                 )}
               </div>
 
-              {/* ERP TO GSHEET MOBILE */}
-              <Link
-                href="/erp-to-gsheet"
-                onClick={closeMenus}
-                className={mobileLinkClass("/erp-to-gsheet")}
-              >
-                ERP TO GSHEET
-              </Link>
-
-              {/* CONTACT MOBILE */}
+              {/* MOBILE CONTACT */}
               <Link
                 href="/contact"
                 onClick={closeMenus}
