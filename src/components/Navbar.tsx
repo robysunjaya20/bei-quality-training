@@ -44,6 +44,11 @@ const toolItems = [
     href: "/report-rechecking",
     description: "Generate dan kelola laporan Rechecking.",
   },
+  {
+    name: "Mendata Part",
+    href: "/data-part",
+    description: "Buat dan kelola data part.",
+  },
 ];
 
 export default function Navbar() {
