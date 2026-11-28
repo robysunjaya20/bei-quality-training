@@ -917,8 +917,7 @@ export default function Home() {
                 )}
 
                 <footer>
-                    Excel Converter <span>•</span> BEI Quality Tools
-                    <span>•</span> by Roby S
+                    Excel Converter by Roby S
                 </footer>
             </main>
         </>

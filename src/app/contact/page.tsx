@@ -694,11 +694,8 @@ export default function ContactPage() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-[1400px] px-6 py-16 lg:px-10 lg:py-20">
-
-        <div className="mb-8 flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
-
-          <div>
+      <section className="mx-auto max-w-[1400px] px-6 pb-16 lg:px-10 lg:py-15">
+        <div>
             <p className="text-xs font-black tracking-[0.2em] text-blue-600">
               CONTACT DATABASE
             </p>
@@ -712,6 +709,83 @@ export default function ContactPage() {
               centralized database.
             </p>
           </div>
+
+        <div data-card-group className="grid grid-cols-2 gap-3 sm:gap-5">
+
+          <div
+            data-card
+            className="group relative min-w-0 overflow-hidden rounded-2xl border border-slate-200 bg-white p-3 transition duration-300 hover:-translate-y-1 hover:border-slate-300 hover:shadow-[0_25px_60px_-25px_rgba(15,23,42,0.3)] sm:p-7"
+          >
+
+            <div className="absolute left-0 top-0 h-1 w-full bg-blue-600" />
+
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-50 text-xl sm:h-14 sm:w-14 sm:text-2xl">
+              ✉
+            </div>
+
+            <p className="mt-4 text-[9px] font-bold tracking-[0.12em] text-blue-600 sm:mt-7 sm:text-xs sm:tracking-[0.2em]">
+              EMAIL
+            </p>
+
+            <h2 className="mt-2 text-base font-black tracking-tight sm:mt-3 sm:text-2xl">
+              Email Us
+            </h2>
+
+            <p className="mt-2 text-xs leading-5 text-slate-500 sm:mt-3 sm:text-sm sm:leading-6">
+              Send us an email for questions, information, or
+              assistance related to the training program.
+            </p>
+
+            <a
+              href="mailto:qc_05@bumjin.co.id"
+              className="mt-4 inline-flex max-w-full items-center gap-1 break-all text-xs font-bold text-[#0b1220] transition hover:text-blue-600 sm:mt-6 sm:gap-2 sm:text-base"
+            >
+              qc_05@bumjin.co.id
+              <span>↗</span>
+            </a>
+
+          </div>
+
+          <div data-card
+            className="group relative min-w-0 overflow-hidden rounded-2xl border border-slate-200 bg-white p-3 transition duration-300 hover:-translate-y-1 hover:border-slate-300 hover:shadow-[0_25px_60px_-25px_rgba(15,23,42,0.3)] sm:p-7"
+          >
+
+            <div className="absolute left-0 top-0 h-1 w-full bg-[#0b1220]" />
+
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-slate-100 text-xl sm:h-14 sm:w-14 sm:text-2xl">
+              ☎
+            </div>
+
+            <p className="mt-4 text-[9px] font-bold tracking-[0.12em] text-slate-600 sm:mt-7 sm:text-xs sm:tracking-[0.2em]">
+              PHONE / WHATSAPP
+            </p>
+
+            <h2 className="mt-2 text-base font-black tracking-tight sm:mt-3 sm:text-2xl">
+              Contact Us
+            </h2>
+
+            <p className="mt-2 text-xs leading-5 text-slate-500 sm:mt-3 sm:text-sm sm:leading-6">
+              Contact the Quality Training Center directly for
+              further assistance.
+            </p>
+
+            <a
+              href="tel:0895385191979"
+              className="mt-4 inline-flex items-center gap-1 text-xs font-bold text-[#0b1220] transition hover:text-blue-600 sm:mt-6 sm:gap-2 sm:text-base"
+            >
+              0895 3851 91979
+              <span>↗</span>
+            </a>
+
+          </div>
+
+        </div>
+      </section>
+
+
+      <section className="mx-auto max-w-[1400px] px-6 py-10 lg:px-10 lg:py-5">
+
+        <div className="mb-8 flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
 
           {token && (
             <button
@@ -805,7 +879,7 @@ export default function ContactPage() {
               </form>
 
               <p className="mt-5 text-center text-xs text-slate-400">
-                Authorized access only · BEI Quality Training
+                Authorized access only
               </p>
 
             </div>
@@ -1066,131 +1140,7 @@ export default function ContactPage() {
           </div>
         </div>
       )}
-
-      <section className="mx-auto max-w-[1400px] px-6 pb-16 lg:px-10">
-
-        <div data-card-group className="grid grid-cols-2 gap-3 sm:gap-5">
-
-          <div
-            data-card
-            className="group relative min-w-0 overflow-hidden rounded-2xl border border-slate-200 bg-white p-3 transition duration-300 hover:-translate-y-1 hover:border-slate-300 hover:shadow-[0_25px_60px_-25px_rgba(15,23,42,0.3)] sm:p-7"
-          >
-
-            <div className="absolute left-0 top-0 h-1 w-full bg-blue-600" />
-
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-50 text-xl sm:h-14 sm:w-14 sm:text-2xl">
-              ✉
-            </div>
-
-            <p className="mt-4 text-[9px] font-bold tracking-[0.12em] text-blue-600 sm:mt-7 sm:text-xs sm:tracking-[0.2em]">
-              EMAIL
-            </p>
-
-            <h2 className="mt-2 text-base font-black tracking-tight sm:mt-3 sm:text-2xl">
-              Email Us
-            </h2>
-
-            <p className="mt-2 text-xs leading-5 text-slate-500 sm:mt-3 sm:text-sm sm:leading-6">
-              Send us an email for questions, information, or
-              assistance related to the training program.
-            </p>
-
-            <a
-              href="mailto:qc_05@bumjin.co.id"
-              className="mt-4 inline-flex max-w-full items-center gap-1 break-all text-xs font-bold text-[#0b1220] transition hover:text-blue-600 sm:mt-6 sm:gap-2 sm:text-base"
-            >
-              qc_05@bumjin.co.id
-              <span>↗</span>
-            </a>
-
-          </div>
-
-          <div
-            data-card
-            className="group relative min-w-0 overflow-hidden rounded-2xl border border-slate-200 bg-white p-3 transition duration-300 hover:-translate-y-1 hover:border-slate-300 hover:shadow-[0_25px_60px_-25px_rgba(15,23,42,0.3)] sm:p-7"
-          >
-
-            <div className="absolute left-0 top-0 h-1 w-full bg-[#0b1220]" />
-
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-slate-100 text-xl sm:h-14 sm:w-14 sm:text-2xl">
-              ☎
-            </div>
-
-            <p className="mt-4 text-[9px] font-bold tracking-[0.12em] text-slate-600 sm:mt-7 sm:text-xs sm:tracking-[0.2em]">
-              PHONE / WHATSAPP
-            </p>
-
-            <h2 className="mt-2 text-base font-black tracking-tight sm:mt-3 sm:text-2xl">
-              Contact Us
-            </h2>
-
-            <p className="mt-2 text-xs leading-5 text-slate-500 sm:mt-3 sm:text-sm sm:leading-6">
-              Contact the Quality Training Center directly for
-              further assistance.
-            </p>
-
-            <a
-              href="tel:0895385191979"
-              className="mt-4 inline-flex items-center gap-1 text-xs font-bold text-[#0b1220] transition hover:text-blue-600 sm:mt-6 sm:gap-2 sm:text-base"
-            >
-              0895 3851 91979
-              <span>↗</span>
-            </a>
-
-          </div>
-
-        </div>
-      </section>
-
-      <section className="mx-auto max-w-[1400px] px-6 pb-16 lg:px-10 lg:pb-20">
-
-        <div
-          data-cta
-          className="overflow-hidden rounded-3xl bg-[#0b1220]"
-        >
-
-          <div className="relative px-8 py-14 text-center sm:px-12 lg:py-20">
-
-            <div className="pointer-events-none absolute left-1/2 top-0 h-40 w-40 -translate-x-1/2 rounded-full bg-blue-600/20 blur-3xl" />
-
-            <div className="relative">
-
-              <p
-                data-cta-item
-                className="text-xs font-bold tracking-[0.25em] text-blue-400"
-              >
-                READY TO LEARN?
-              </p>
-
-              <h2
-                data-cta-item
-                className="mx-auto mt-4 max-w-2xl text-3xl font-black tracking-tight text-white sm:text-4xl"
-              >
-                Start your quality training journey.
-              </h2>
-
-              <p
-                data-cta-item
-                className="mx-auto mt-5 max-w-xl text-sm leading-6 text-slate-300"
-              >
-                Explore the available training modules and improve
-                your understanding of quality and automotive core tools.
-              </p>
-
-              <Link
-                data-cta-item
-                href="/modules"
-                className="mt-8 inline-flex items-center rounded-xl bg-blue-600 px-6 py-3.5 text-sm font-bold text-white transition hover:bg-blue-700"
-              >
-                Explore Training Modules
-                <span className="ml-2">→</span>
-              </Link>
-
-            </div>
-          </div>
-        </div>
-      </section>
-
+      
       <footer className="border-t border-slate-200 bg-[#f6f7f9]">
 
         <div className="mx-auto flex max-w-[1400px] flex-col gap-4 px-6 py-8 text-xs text-slate-400 sm:flex-row sm:items-center sm:justify-between lg:px-10">

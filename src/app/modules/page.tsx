@@ -6,9 +6,8 @@ const modules = [
   {
     number: "01",
     title: "General Modul PDF",
-    subtitle: "Bumjin Training Center",
     description:
-    "Materi general training dalam format PDF. Cocok digunakan sebagai referensi pembelajaran.",
+    "Materi general training dalam format PDF. Gunakan modul ini untuk mempelajari materi training secara lengkap.",
     type: "PDF",
     href: "https://drive.google.com/file/d/1ovkSgJlwO_dfEjO2z0W3iNJc0WKY5KN7/view?usp=sharing",
     accent: "blue",
@@ -16,7 +15,6 @@ const modules = [
   {
     number: "02",
     title: "General Modul PPT",
-    subtitle: "Bumjin Training Center",
     description:
       "Materi general training dalam format PowerPoint. Gunakan modul ini untuk mempelajari materi training secara lengkap.",
     type: "POWERPOINT",
@@ -25,8 +23,7 @@ const modules = [
   },
   {
     number: "03",
-    title: "5S & 3T Modul",
-    subtitle: "Bumjin Training Center",
+    title: "Modul 5S & 3T",
     description:
       "Materi 5S & 3T dalam format PDF. Gunakan modul ini untuk mempelajari materi training mengenai 5S & 3T.",
     type: "PDF",
@@ -36,7 +33,6 @@ const modules = [
   {
     number: "04",
     title: "Basic Training Defect Injection_Bumjin",
-    subtitle: "Bumjin Training Center",
     description:
       "Materi Basic Training Defect Injection dalam format PDF. Cocok digunakan sebagai referensi pembelajaran mengenai defect Injection.",
     type: "POWERPOINT",
@@ -46,7 +42,6 @@ const modules = [
   {
     number: "05",
     title: "Basic 14Q Principle",
-    subtitle: "Bumjin Training Center",
     description:
       "Materi Basic 14Q Principle dalam format PDF. Gunakan modul ini untuk mempelajari materi training mengenai Basic 14Q Principle.",
     type: "PDF",
@@ -56,7 +51,6 @@ const modules = [
   {
     number: "06",
     title: "Modul Lv 1",
-    subtitle: "Bumjin Training Center",
     description:
       "Materi Basic Training Untuk Lv 1 dalam format PDF. Digunakan sebagai referensi pembelajaran Di LV 1.",
     type: "POWERPOINT",
@@ -133,19 +127,15 @@ export default function ModulesPage() {
 
           <div>
 
-            <p className="text-[10px] font-black tracking-[0.25em] text-slate-400">
-              GENERAL TRAINING
-            </p>
 
             <h2 className="mt-2 text-3xl font-black tracking-tight sm:text-4xl">
               General Module
             </h2>
+            <p className="text-[10px] font-black tracking-[0.25em] text-slate-400">
+              Modul yang digunakan dalam BEI Quality Training.
+            </p>
 
           </div>
-
-          <p className="max-w-md text-sm leading-6 text-slate-400 md:text-right">
-            Pilih materi dalam format PowerPoint atau PDF.
-          </p>
 
         </div>
 
@@ -314,7 +304,6 @@ export default function ModulesPage() {
 function ModuleCard({
   number,
   title,
-  subtitle,
   description,
   type,
   href,
@@ -322,7 +311,6 @@ function ModuleCard({
 }: {
   number: string;
   title: string;
-  subtitle: string;
   description: string;
   type: string;
   href: string;
@@ -351,33 +339,9 @@ function ModuleCard({
 
       <div className="flex items-start justify-between">
 
-        <span className="text-xs font-black text-slate-300">
-          {number}
-        </span>
-
-        <span
-          className={
-            type === "PDF"
-              ? "rounded-full bg-red-50 px-3 py-1.5 text-[9px] font-black tracking-[0.15em] text-red-600"
-              : "rounded-full bg-blue-50 px-3 py-1.5 text-[9px] font-black tracking-[0.15em] text-blue-600"
-          }
-        >
-          {type}
-        </span>
-
-      </div>
-
-      {/* TITLE */}
-
-      <div className="mt-12">
-
         <h3 className="text-2xl font-black tracking-tight text-[#0b1220] transition-colors group-hover:text-blue-600">
-          {title}
+          {number}. {title}
         </h3>
-
-        <p className="mt-1 text-xs font-semibold text-slate-400">
-          {subtitle}
-        </p>
 
       </div>
 
@@ -391,15 +355,22 @@ function ModuleCard({
 
       <div className="mt-8 flex items-center justify-between border-t border-slate-100 pt-5">
 
-        <span className="text-[10px] font-black tracking-[0.15em] text-slate-400">
-          OPEN MODULE
-        </span>
-
         <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#0b1220] text-sm text-white transition-all duration-300 group-hover:translate-x-1 group-hover:bg-blue-600">
           ↗
         </span>
 
+        <span
+          className={
+            type === "PDF"
+              ? "rounded-full bg-red-50 px-3 py-1.5 text-[9px] font-black tracking-[0.15em] text-red-600"
+              : "rounded-full bg-blue-50 px-3 py-1.5 text-[9px] font-black tracking-[0.15em] text-blue-600"
+          }
+        >
+          {type}
+        </span>
+
       </div>
+      
 
     </a>
   );
@@ -419,13 +390,15 @@ function InfoCard({
   return (
     <div data-card className="rounded-2xl border border-slate-200 bg-slate-50 p-5">
 
-      <span className="text-[10px] font-black text-blue-600">
-        {number}
-      </span>
+      <div className="flex items-center gap-3">
+        <span className="text-[10px] font-black text-blue-600">
+          {number}
+        </span>
 
-      <h3 className="mt-4 text-sm font-black text-[#0b1220]">
-        {title}
-      </h3>
+        <h3 className="text-sm font-black text-[#0b1220]">
+          {title}
+        </h3>
+      </div>
 
       <p className="mt-2 text-xs leading-5 text-slate-400">
         {description}
